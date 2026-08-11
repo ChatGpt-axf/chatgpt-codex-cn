@@ -8,9 +8,9 @@ category: "Plus / Pro"
 tags: ["ChatGPT Plus", "ChatGPT Pro", "版本对比", "订阅选择"]
 keywords: ["ChatGPT Plus 和 Pro 怎么选", "ChatGPT Plus和Pro区别", "ChatGPT Plus vs Pro", "ChatGPT Pro和Plus哪个好", "ChatGPT Plus Pro怎么选"]
 author: "ChatGPT & Codex 中文指南编辑部"
-status: "review"
+status: "published"
 draft: false
-noindex: true
+noindex: false
 conversionLevel: "soft"
 featured: true
 pillar: true

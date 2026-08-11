@@ -8,9 +8,9 @@ category: "Codex"
 tags: ["Codex", "AI 编程", "开发者工具", "OpenAI"]
 keywords: ["Codex 是什么", "OpenAI Codex", "Codex 适合哪些开发者", "AI 编码代理"]
 author: "ChatGPT & Codex 中文指南编辑部"
-status: "review"
+status: "published"
 draft: false
-noindex: true
+noindex: false
 conversionLevel: "none"
 featured: true
 pillar: true

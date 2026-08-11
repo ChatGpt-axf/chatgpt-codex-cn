@@ -8,9 +8,9 @@ category: "订阅指南"
 tags: ["ChatGPT Plus", "订阅", "支付", "国内用户"]
 keywords: ["ChatGPT Plus 国内怎么订阅", "ChatGPT Plus 订阅", "ChatGPT Plus 支付失败", "ChatGPT Plus 国内升级"]
 author: "ChatGPT & Codex 中文指南编辑部"
-status: "review"
+status: "published"
 draft: false
-noindex: true
+noindex: false
 conversionLevel: "soft"
 featured: true
 pillar: false

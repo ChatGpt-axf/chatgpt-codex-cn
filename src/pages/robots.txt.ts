@@ -20,10 +20,11 @@ function crawlerBlock(crawler: string, enabled: boolean): string[] {
 
 export const GET: APIRoute = () => {
   const rootRobotsUrl = `${new URL(siteConfig.site.url).origin}/robots.txt`;
+  const rootDeployment = projectRootPath === '/';
   if (!siteAllowsIndexing()) {
     const lines = [
       `# ${siteConfig.site.status} site: search indexing is disabled until the site is active.`,
-      `# Advisory only: the authoritative robots.txt is ${rootRobotsUrl}`,
+      ...(rootDeployment ? [] : [`# Advisory only: the authoritative robots.txt is ${rootRobotsUrl}`]),
       '',
       'User-agent: *',
       `Disallow: ${projectRootPath}`,
@@ -33,8 +34,12 @@ export const GET: APIRoute = () => {
   }
 
   const lines = [
-    `# Advisory only: the authoritative robots.txt is ${rootRobotsUrl}`,
-    '# Review and merge these rules into the existing root robots.txt; do not overwrite it.',
+    ...(rootDeployment
+      ? [`# robots.txt for ${siteConfig.site.publicUrl}`]
+      : [
+          `# Advisory only: the authoritative robots.txt is ${rootRobotsUrl}`,
+          '# Review and merge these rules into the existing root robots.txt; do not overwrite it.',
+        ]),
     '',
     'User-agent: *',
     `Allow: ${projectRootPath}`,

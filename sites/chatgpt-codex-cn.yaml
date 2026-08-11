@@ -8,7 +8,7 @@ site:
   publicUrl: https://gptaixufei.com/
   brand: ChatGPT & Codex 中文指南
   conversionUrl: https://cwx.aixufei.com/
-  status: setup
+  status: active
   publishMethod: git_cloudflare_pages
   adminUrl: https://seo.gptaixufei.com/
   url: https://gptaixufei.com
@@ -133,6 +133,6 @@ searchEngines:
     verification: *emptyVerification
   ai:
     enabled: true
-    openAiSearchBot: false
+    openAiSearchBot: true
     verificationCode: ''
     verification: *emptyVerification

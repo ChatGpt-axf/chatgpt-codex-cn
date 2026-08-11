@@ -8,9 +8,9 @@ category: "ChatGPT Plus"
 tags: ["ChatGPT Plus", "使用指南", "AI 工具", "OpenAI"]
 keywords: ["ChatGPT Plus 使用指南", "ChatGPT Plus 怎么用", "ChatGPT Plus 教程", "ChatGPT Plus 功能"]
 author: "ChatGPT & Codex 中文指南编辑部"
-status: "review"
+status: "published"
 draft: false
-noindex: true
+noindex: false
 conversionLevel: "soft"
 featured: true
 pillar: true

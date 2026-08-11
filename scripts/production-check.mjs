@@ -17,6 +17,7 @@ const expectedBase = normalizeBasePath(config.site.base);
 const expectedBaseLabel = expectedBase === '/' ? '/' : `${expectedBase}/`;
 const escapedOrigin = expectedOrigin.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const baseDir = expectedBase.replace(/^\//, '');
+const rootDeployment = expectedBase === '/';
 const projectUrl = getProjectRootUrl(config);
 const pages = getHtmlPages();
 const buildMap = getBuildMap();
@@ -35,7 +36,7 @@ function checkProjectReference(value, page, kind) {
     if (url.origin === expectedOrigin && !isProjectUrl(value, config)) error('outside-project', `${kind} escapes ${expectedBaseLabel}: ${value}`, page.route);
     return;
   }
-  if (value.startsWith('/') && !(value === expectedBase || value.startsWith(`${expectedBase}/`))) {
+  if (!rootDeployment && value.startsWith('/') && !(value === expectedBase || value.startsWith(`${expectedBase}/`))) {
     error('root-path', `${kind} uses a main-site root path: ${value}`, page.route);
     return;
   }
@@ -68,7 +69,7 @@ for (const page of pages) {
     }
   });
   page.$('meta[property="og:image"], meta[name="twitter:image"]').each((_, node) => checkProjectReference(page.$(node).attr('content') || '', page, 'Social image'));
-  if (/["'(]\/_astro\//.test(page.html)) error('root-astro-asset', 'HTML contains a root /_astro/ asset reference.', page.route);
+  if (!rootDeployment && /["'(]\/_astro\//.test(page.html)) error('root-astro-asset', 'HTML contains a root /_astro/ asset reference.', page.route);
 }
 
 for (const url of new Set([...standard.urls, ...indexed.urls])) {
@@ -105,11 +106,21 @@ for (const file of fg.sync('dist/**/*.{html,xml,txt,css,js,json}', { onlyFiles: 
 
 const advisoryRobots = path.resolve('dist/robots.txt');
 const recommendedRobots = path.resolve('reports/root-robots-recommended.txt');
-if (!fs.existsSync(advisoryRobots) || !fs.readFileSync(advisoryRobots, 'utf8').includes('Advisory only')) {
+const robotsContent = fs.existsSync(advisoryRobots) ? fs.readFileSync(advisoryRobots, 'utf8') : '';
+if (!robotsContent) {
+  error('robots-role', `${expectedBaseLabel}robots.txt is missing.`);
+} else if (rootDeployment) {
+  if (robotsContent.includes('Advisory only')) error('robots-role', 'Root deployment robots.txt must be authoritative, not advisory.');
+  if (!robotsContent.includes(`Sitemap: ${projectUrl}sitemap.xml`)) error('robots-sitemap', 'Root robots.txt has the wrong Sitemap URL.');
+} else if (!robotsContent.includes('Advisory only')) {
   error('robots-role', `${expectedBaseLabel}robots.txt must identify itself as advisory, not the authoritative root robots file.`);
 }
-if (!fs.existsSync(recommendedRobots)) error('robots-recommendation', 'reports/root-robots-recommended.txt is missing.');
-else if (!fs.readFileSync(recommendedRobots, 'utf8').includes(`Sitemap: ${projectUrl}sitemap.xml`)) error('robots-sitemap', 'Root robots recommendation has the wrong Sitemap URL.');
+if (!rootDeployment) {
+  if (!fs.existsSync(recommendedRobots)) error('robots-recommendation', 'reports/root-robots-recommended.txt is missing.');
+  else if (!fs.readFileSync(recommendedRobots, 'utf8').includes(`Sitemap: ${projectUrl}sitemap.xml`)) {
+    error('robots-sitemap', 'Root robots recommendation has the wrong Sitemap URL.');
+  }
+}
 
 for (const id of ['google', 'bing', 'baidu', '360', 'sogou', 'shenma']) {
   const file = path.resolve(`reports/${id}-submit-urls.txt`);
@@ -127,7 +138,9 @@ else {
 }
 
 if (!process.env.INDEXNOW_KEY) warn('indexnow-key', 'INDEXNOW_KEY is not configured; no live IndexNow submission can occur.');
-warn('prelaunch-domain', 'Production domain and root robots ownership are not configured for this prelaunch site.');
+if (!rootDeployment || config.site.status !== 'active') {
+  warn('prelaunch-domain', 'Production domain and root robots ownership are not configured for this prelaunch site.');
+}
 
 const report = {
   generatedAt: new Date().toISOString(),

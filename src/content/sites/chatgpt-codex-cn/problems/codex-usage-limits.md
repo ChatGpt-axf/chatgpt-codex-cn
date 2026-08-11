@@ -8,9 +8,9 @@ category: "Codex"
 tags: ["Codex", "额度", "Credits", "故障解决"]
 keywords: ["Codex 额度不够怎么办", "Codex credits", "Codex usage limits", "Codex 用量限制"]
 author: "ChatGPT & Codex 中文指南编辑部"
-status: "review"
+status: "published"
 draft: false
-noindex: true
+noindex: false
 conversionLevel: "soft"
 featured: false
 pillar: false
