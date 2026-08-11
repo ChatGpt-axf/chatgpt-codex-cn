@@ -6,8 +6,10 @@ import { crawlerAllowed } from './lib/search-engines.mjs';
 import { loadSiteConfig } from './lib/content.mjs';
 import { withSiteBase } from './lib/site-url.mjs';
 
-const entries = readContent({ includeDrafts: false }).filter((entry) => !entry.data.noindex);
 const config = loadSiteConfig();
+const prelaunchMode = config.site.status !== 'active';
+const entries = readContent({ includeDrafts: false })
+  .filter((entry) => prelaunchMode || !entry.data.noindex);
 const pages = new Map(getHtmlPages().map((page) => [page.route, page]));
 const robotsFile = path.resolve('dist/robots.txt');
 const robots = fs.existsSync(robotsFile) ? fs.readFileSync(robotsFile, 'utf8') : '';
@@ -103,11 +105,12 @@ for (const entry of entries) {
 
 const crawler = {
   name: 'OAI-SearchBot',
+  policy: prelaunchMode ? 'prelaunch-blocked' : 'active-site-required',
   robotsPresent: Boolean(robots),
   allowed: Boolean(robots && crawlerAllowed(robots, 'OAI-SearchBot', entries[0]?.url || withSiteBase('/', config))),
 };
 if (!crawler.robotsPresent) errors.push({ code: 'robots', message: 'robots.txt is missing.', file: 'dist/robots.txt', url: '/' });
-else if (!crawler.allowed) errors.push({ code: 'oai-searchbot', message: 'OAI-SearchBot is blocked from published content.', file: 'dist/robots.txt', url: entries[0]?.url || '/' });
+else if (!crawler.allowed && !prelaunchMode) errors.push({ code: 'oai-searchbot', message: 'OAI-SearchBot is blocked from published content.', file: 'dist/robots.txt', url: entries[0]?.url || '/' });
 
 const status = errors.length > 0 ? 'ERROR' : warnings.length > 0 ? 'WARNING' : 'READY';
 const report = {
@@ -119,6 +122,7 @@ const report = {
   warnings,
   pages: pageReports,
   note: 'GEO readiness improves machine discoverability and answerability but does not guarantee indexing, ranking, or citation.',
+  prelaunchMode,
 };
 fs.mkdirSync(path.resolve('reports'), { recursive: true });
 fs.writeFileSync(path.resolve('reports/geo-audit.json'), `${JSON.stringify(report, null, 2)}\n`);

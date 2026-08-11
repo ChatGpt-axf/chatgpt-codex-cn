@@ -17,4 +17,4 @@ The current site remains in prelaunch mode:
 - no DNS binding
 - no custom production domain
 
-Do not bind a production domain until `sites/chatgpt-codex-cn.yaml` has been updated from `pending-domain.invalid` to the real public domain and all search engine verification values are configured.
+Do not bind `gptaixufei.com` until domain review is complete and all search engine verification values are configured.

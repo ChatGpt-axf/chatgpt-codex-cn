@@ -2,16 +2,16 @@ site:
   id: chatgpt-codex-cn
   name: ChatGPT & Codex 中文指南
   shortName: ChatGPT Codex 指南
-  domain: pending-domain.invalid
-  baseUrl: https://pending-domain.invalid
+  domain: gptaixufei.com
+  baseUrl: https://gptaixufei.com
   basePath: /
-  publicUrl: https://pending-domain.invalid/
+  publicUrl: https://gptaixufei.com/
   brand: ChatGPT & Codex 中文指南
   conversionUrl: https://cwx.aixufei.com/
   status: setup
   publishMethod: git_cloudflare_pages
   adminUrl: https://seo.pending-domain.invalid/
-  url: https://pending-domain.invalid
+  url: https://gptaixufei.com
   base: /
   language: zh-CN
   locale: zh_CN

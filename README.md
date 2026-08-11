@@ -11,6 +11,7 @@ Astro static site for the first independent prelaunch content site in the AI SEO
 - Production publishing: disabled
 - Indexing: disabled through `noindex` and `robots.txt`
 - Search submission: disabled
+- Planned production domain: `gptaixufei.com`
 - Conversion URL: `https://cwx.aixufei.com/`
 
 ## Cloudflare Pages
@@ -26,7 +27,7 @@ Production branch: main
 Node.js version: 22
 ```
 
-No DNS binding or custom production domain is configured in this repository yet.
+No DNS binding or custom production domain is configured in Cloudflare Pages yet.
 
 ## Local Verification
 
@@ -41,7 +42,7 @@ The build command uses the local site configuration file:
 sites/chatgpt-codex-cn.yaml
 ```
 
-The current placeholder public URL is `https://pending-domain.invalid/`. Replace it only after the real production domain is selected.
+The planned public URL is `https://gptaixufei.com/`. Keep `site.status: setup` and `noindex` until the domain review is complete and the domain is bound in Cloudflare Pages.
 
 ## Content Scope
 
