@@ -7,6 +7,7 @@ interface Props {
 
 const { level = siteConfig.content.defaultConversionLevel } = Astro.props;
 const show = level !== 'none' && Boolean(siteConfig.site.conversionUrl);
+const conversionBrand = 'ChatGPT & Codex';
 const text = level === 'normal'
   ? `需要订阅、升级或处理国内支付时，可以进入${siteConfig.site.brand}。`
   : `如果已经产生订阅或升级需求，可以再了解${siteConfig.site.brand}。`;
@@ -15,9 +16,11 @@ const text = level === 'normal'
 {show && (
   <aside class="conversion-link" aria-label="转化入口">
     <p>{text}</p>
-    <a href={siteConfig.site.conversionUrl} rel="noopener noreferrer" data-link-type="conversion">
-      {siteConfig.site.brand}
-    </a>
+    <span class="conversion-entry">
+      <a href={siteConfig.site.conversionUrl} rel="noopener noreferrer" data-link-type="conversion">
+        <strong>{conversionBrand}</strong>
+      </a><strong class="conversion-suffix">订阅</strong>
+    </span>
   </aside>
 )}
 
@@ -30,6 +33,10 @@ const text = level === 'normal'
   }
   .conversion-link p {
     margin: 0 0 10px;
+  }
+  .conversion-entry {
+    display: inline-flex;
+    align-items: center;
   }
   .conversion-link a {
     display: inline-flex;
@@ -45,5 +52,10 @@ const text = level === 'normal'
   }
   .conversion-link a:hover {
     border-color: var(--color-primary);
+  }
+  .conversion-suffix {
+    margin-left: 2px;
+    color: var(--color-primary);
+    font-weight: 750;
   }
 </style>
