@@ -44,6 +44,7 @@ const heroImage = `url("${withBasePath(siteConfig.seo.defaultOgImage)}")`;
       <h1>{siteConfig.site.name}</h1>
       <p>{siteConfig.site.description}</p>
       <div class="hero-actions">
+        <a class="conversion-action" href={siteConfig.site.conversionUrl} target="_blank" rel="noopener noreferrer">订阅 / 升级</a>
         <a class="primary-action" href={withBasePath('/guides/')}>浏览实用指南</a>
         {siteConfig.features.search && <a class="secondary-action" href={withBasePath('/search/')}>搜索知识库</a>}
       </div>
@@ -153,6 +154,8 @@ const heroImage = `url("${withBasePath(siteConfig.seo.defaultOgImage)}")`;
   .hero p { max-width: 720px; margin: 22px 0 0; color: #e0eee7; font-size: clamp(1.05rem, 2.5vw, 1.35rem); }
   .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
   .hero-actions a { display: inline-flex; min-height: 46px; align-items: center; padding: 10px 17px; border-radius: 6px; font-weight: 750; text-decoration: none; }
+  .conversion-action { background: var(--color-primary); color: white; }
+  .conversion-action:hover { background: #066a4c; }
   .primary-action { background: #f3fcf7; color: #075e43; }
   .secondary-action { border: 1px solid rgba(255,255,255,.58); color: white; }
   .value-band { border-bottom: 1px solid var(--color-border); background: white; }
