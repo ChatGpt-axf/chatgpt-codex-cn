@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ContentCard from '../../components/ContentCard.astro';
+import { siteConfig } from '../../config/site';
+import { breadcrumbSchema, webPageSchema } from '../../seo/schema';
+import { getPublishedContent, toUrlSegment, type AnyContentEntry } from '../../utils/content';
+
+export async function getStaticPaths() {
+  const entries = await getPublishedContent();
+  const tags = new Map<string, { label: string; entries: AnyContentEntry[] }>();
+  for (const entry of entries) for (const label of entry.data.tags) {
+    const key = toUrlSegment(label);
+    const group = tags.get(key) || { label, entries: [] };
+    group.entries.push(entry);
+    tags.set(key, group);
+  }
+  return [...tags.entries()].map(([tag, value]) => ({ params: { tag }, props: value }));
+}
+
+const { label, entries } = Astro.props as { label: string; entries: AnyContentEntry[] };
+const path = `/tags/${toUrlSegment(label)}/`;
+const title = `标签：${label}`;
+const description = `查看与“${label}”相关的指南、概念、对比和问题解决内容，按最后更新时间集中整理。`;
+const breadcrumbs = [{ name: '首页', path: '/' }, { name: title, path }];
+---
+
+<BaseLayout title={title} description={description} canonicalPath={path} schema={[webPageSchema({ title, description, path, type: 'CollectionPage' }), breadcrumbSchema(breadcrumbs)]}>
+  <div class="container">
+    {siteConfig.features.breadcrumbs && <Breadcrumbs items={breadcrumbs} />}
+    <header class="page-header"><h1>{title}</h1><p>{description}</p></header>
+    <section class="listing-section"><div class="card-grid">{entries.map((entry) => <ContentCard entry={entry} />)}</div></section>
+  </div>
+</BaseLayout>
+<style>.listing-section { padding-block: 42px; }</style>

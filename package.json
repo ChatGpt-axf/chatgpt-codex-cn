@@ -1,0 +1,60 @@
+{
+  "name": "chatgpt-codex-cn",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "node scripts/build-site.mjs --id=chatgpt-codex-cn",
+    "build:multi": "node scripts/build-multi-site.mjs",
+    "build:site": "node scripts/build-site.mjs",
+    "preview": "astro preview",
+    "check": "astro check",
+    "visual:check": "node scripts/visual-check.mjs",
+    "seo:check": "node scripts/seo-check.mjs",
+    "content:duplicate": "node scripts/duplicate-check.mjs",
+    "content:audit": "node scripts/content-audit.mjs",
+    "link:check": "node scripts/link-check.mjs",
+    "sitemap:check": "node scripts/sitemap-check.mjs",
+    "geo:audit": "node scripts/geo-audit.mjs",
+    "search:audit": "node scripts/search-audit.mjs",
+    "search:report": "node scripts/search-report.mjs",
+    "production:check": "node scripts/production-check.mjs",
+    "submit:bing": "node scripts/submit-bing.mjs",
+    "submit:baidu": "node scripts/submit-baidu.mjs",
+    "submit:360": "node scripts/submit-360.mjs",
+    "submit:sogou": "node scripts/submit-sogou.mjs",
+    "submit:shenma": "node scripts/submit-shenma.mjs",
+    "submit:all": "node scripts/search-submit.mjs --engine=all",
+    "indexnow": "npm run submit:bing --",
+    "publish:prepare": "node scripts/publish-prepare.mjs",
+    "site:create": "node scripts/create-site.mjs",
+    "keyword:cluster": "node scripts/keyword-cluster.mjs",
+    "content:create": "node scripts/create-content.mjs",
+    "ai:draft": "node scripts/ai-draft.mjs",
+    "workflow:audit": "node scripts/workflow-audit.mjs",
+    "internal-link": "node scripts/internal-link.mjs"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^7.0.5",
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.3",
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^7.2.0",
+    "cheerio": "^1.2.0",
+    "fast-glob": "^3.3.3",
+    "gray-matter": "^4.0.3",
+    "js-yaml": "^5.2.3",
+    "tailwindcss": "^4.3.3"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^26.2.0",
+    "playwright-core": "^1.62.1",
+    "typescript": "^6.0.3"
+  }
+}

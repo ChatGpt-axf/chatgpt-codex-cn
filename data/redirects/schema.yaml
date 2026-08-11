@@ -1,0 +1,15 @@
+fields:
+  oldUrl:
+    type: string
+    required: true
+    description: Existing site-relative URL beginning with a slash.
+  newUrl:
+    type: string
+    required: true
+    description: Canonical destination URL; prefer a site-relative URL.
+  type:
+    type: integer
+    allowed:
+      - 301
+      - 302
+    default: 301

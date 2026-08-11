@@ -1,0 +1,26 @@
+---
+import PillarLanding from '../components/PillarLanding.astro';
+---
+
+<PillarLanding
+  title="ChatGPT 中文教程与使用指南"
+  description="从基础使用、结果核验到方案选择，系统整理 ChatGPT 的中文教程、常见问题与可靠来源。"
+  path="/chatgpt/"
+  eyebrow="ChatGPT Pillar"
+  directAnswer="ChatGPT 是 OpenAI 提供的对话式 AI 产品。本主题入口帮助中文用户按任务学习提问、写作、分析与信息核验方法，并区分会随时间变化的模型、功能、方案和使用限制。"
+  takeaways={[
+    '先定义任务、上下文和验收标准，再开始对话。',
+    '涉及数字、日期、引用和政策时回到原始来源核验。',
+    '方案和功能可能变化，购买前以官方页面和账户界面为准。',
+  ]}
+  sections={[
+    { title: '学习路径', body: '新用户可以先阅读完整使用指南，再根据需要进入 Plus、Pro、常见问题和版本对比。每个专题都保留明确的适用范围、限制和更新时间。' },
+    { title: '内容边界', body: '本站不把模型回答视为无需检查的事实，也不固定记录容易过期的消息额度和功能清单。动态信息会链接到官方来源。' },
+  ]}
+  links={[
+    { title: 'ChatGPT 使用指南', description: '从任务定义到结果核验的完整流程。', path: '/guides/chatgpt/' },
+    { title: 'ChatGPT 常见问题', description: '账户、数据、功能和事实核验问题。', path: '/faq/chatgpt-faq/' },
+    { title: 'ChatGPT Plus', description: '判断个人订阅是否匹配真实工作负载。', path: '/chatgpt-plus/' },
+    { title: 'ChatGPT Pro', description: '理解高强度个人使用场景和选择边界。', path: '/chatgpt-pro/' },
+  ]}
+/>

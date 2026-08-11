@@ -1,0 +1,99 @@
+engines:
+  - id: google
+    name: Google
+    enabled: true
+    crawler: Googlebot
+    supportsSitemap: true
+    supportsIndexNow: false
+    supportsPushApi: false
+    supportsManualSubmission: true
+    webmasterPlatform: Google Search Console
+    webmasterUrl: https://search.google.com/search-console/
+    requiresVerification: true
+    verificationStatus: site-config
+    documentation: https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap
+    notes: 普通网页使用 Sitemap、可抓取 HTML、内部链接和 Search Console；Indexing API 不用于普通内容批量提交。
+  - id: bing
+    name: Bing
+    enabled: true
+    crawler: Bingbot
+    supportsSitemap: true
+    supportsIndexNow: true
+    supportsPushApi: false
+    supportsManualSubmission: true
+    webmasterPlatform: Bing Webmaster Tools
+    webmasterUrl: https://www.bing.com/webmasters/
+    requiresVerification: true
+    verificationStatus: site-config
+    documentation: https://www.indexnow.org/documentation
+    notes: 使用 Sitemap 和 IndexNow 通知新增、更新或删除 URL；提交不等于保证索引。
+  - id: baidu
+    name: 百度搜索
+    enabled: true
+    crawler: Baiduspider
+    supportsSitemap: true
+    supportsIndexNow: false
+    supportsPushApi: true
+    supportsManualSubmission: true
+    webmasterPlatform: 百度搜索资源平台
+    webmasterUrl: https://ziyuan.baidu.com/
+    requiresVerification: true
+    verificationStatus: site-config
+    documentation: https://ziyuan.baidu.com/college/articleinfo?id=3329
+    notes: 普通收录支持 API、Sitemap 和手动提交；API、快速抓取及配额取决于已验证站点的实际权益。
+  - id: so360
+    name: 360搜索
+    enabled: true
+    crawler: 360Spider
+    supportsSitemap: true
+    supportsIndexNow: false
+    supportsPushApi: false
+    supportsManualSubmission: true
+    webmasterPlatform: 360站长平台
+    webmasterUrl: https://zhanzhang.so.com/
+    requiresVerification: true
+    verificationStatus: site-config
+    documentation: https://info.so.360.cn/site_submit.html
+    notes: 使用标准 Sitemap、站长平台和人工提交；未确认公开通用提交 API，因此不模拟自动提交。
+  - id: sogou
+    name: 搜狗搜索
+    enabled: true
+    crawler: Sogou web spider
+    supportsSitemap: true
+    supportsIndexNow: false
+    supportsPushApi: false
+    supportsManualSubmission: true
+    webmasterPlatform: 搜狗站长平台
+    webmasterUrl: https://data.open.sogou.com/
+    requiresVerification: true
+    verificationStatus: site-config
+    documentation: https://help.sogou.com/spider.html
+    notes: 支持 robots 与 Sitemap 发现；Sitemap 提交资格可能受站长平台权限影响，不假设存在公开自动 API。
+  - id: shenma
+    name: 神马搜索
+    enabled: true
+    crawler: YisouSpider
+    supportsSitemap: true
+    supportsIndexNow: false
+    supportsPushApi: false
+    supportsManualSubmission: true
+    webmasterPlatform: 神马站长平台
+    webmasterUrl: https://zhanzhang.sm.cn/
+    requiresVerification: true
+    verificationStatus: site-config
+    documentation: https://zhanzhang.sm.cn/open/helpuser
+    notes: 重点检查移动端可访问性，并通过 Sitemap、站长平台和人工配置提交；不假设公开通用 API。
+  - id: ai
+    name: AI Search / GEO
+    enabled: true
+    crawler: OAI-SearchBot
+    supportsSitemap: true
+    supportsIndexNow: false
+    supportsPushApi: false
+    supportsManualSubmission: false
+    webmasterPlatform: Open Web
+    webmasterUrl: https://help.openai.com/
+    requiresVerification: false
+    verificationStatus: not-required
+    documentation: https://help.openai.com/en/articles/12627856-publishers-and-developers-faq
+    notes: 检查 OAI-SearchBot 与开放 Web 可访问性；Google AI 和 Bing Copilot 分别继承 Google/Bing 的索引基础。

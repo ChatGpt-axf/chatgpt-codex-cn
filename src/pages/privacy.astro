@@ -1,0 +1,10 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { siteConfig } from '../config/site';
+---
+<PageLayout title="隐私政策" description={`说明${siteConfig.site.name}在静态网站访问、联系邮件与可选分析服务中的数据处理原则和用户选择。`} path="/privacy/">
+  <p>本站以静态 HTML 为主，默认不要求注册账户，也不在内容页面主动收集敏感个人信息。</p>
+  <h2>访问数据</h2><p>只有在站点配置明确启用分析服务后，部署方才可能处理基础访问事件。具体提供方、数据范围与保留期限应在正式部署前补充，并遵守适用法律。</p>
+  <h2>联系邮件</h2><p>当你主动发送内容反馈时，我们会使用邮件中的信息处理该请求。请勿发送密码、API 密钥、支付信息或与纠错无关的敏感数据。</p>
+  <h2>外部链接</h2><p>参考资料可能指向第三方网站。第三方的隐私实践由其自身政策决定，访问前应查看对应说明。</p>
+</PageLayout>

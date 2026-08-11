@@ -1,0 +1,55 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import SEOHead from '../components/SEOHead.astro';
+import Schema from '../components/Schema.astro';
+import { siteAllowsIndexing, siteConfig } from '../config/site';
+import { withBasePath } from '../utils/url';
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonicalPath?: string;
+  image?: string;
+  noindex?: boolean;
+  pageType?: 'website' | 'article';
+  publishedTime?: Date;
+  modifiedTime?: Date;
+  author?: string;
+  schema?: Record<string, unknown> | Array<Record<string, unknown>>;
+}
+
+const props = Astro.props;
+const noindex = Boolean(props.noindex || !siteAllowsIndexing());
+const cssVariables = [
+  `--color-primary:${siteConfig.brand.primaryColor}`,
+  `--color-secondary:${siteConfig.brand.secondaryColor}`,
+  `--color-background:${siteConfig.brand.backgroundColor}`,
+  `--color-text:${siteConfig.brand.textColor}`,
+  `--color-muted:${siteConfig.brand.mutedColor}`,
+  `--color-border:${siteConfig.brand.borderColor}`,
+].join(';');
+---
+
+<!doctype html>
+<html lang={siteConfig.site.language} style={cssVariables}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content={siteConfig.brand.primaryColor} />
+    <link rel="icon" href={withBasePath(siteConfig.site.favicon)} />
+    {siteConfig.features.rss && <link rel="alternate" type="application/rss+xml" title={siteConfig.site.name} href={withBasePath('/rss.xml')} />}
+    <SEOHead {...props} noindex={noindex} />
+    {props.schema && <Schema data={props.schema} />}
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">跳到正文</a>
+    <Header />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

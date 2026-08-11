@@ -1,0 +1,7 @@
+keyword,primary_keyword,cluster,intent,priority,target_url,status
+ChatGPT 使用指南,ChatGPT 使用,chatgpt,informational,high,/guides/chatgpt/,mapped
+ChatGPT 怎么用,ChatGPT 使用,chatgpt,informational,high,/guides/chatgpt/,merged
+ChatGPT Plus 是否值得,ChatGPT Plus,chatgpt-plus,commercial,medium,/guides/chatgpt-plus-guide/,mapped
+Plus 和 Pro 区别,ChatGPT Plus vs Pro,chatgpt-plans,comparison,high,/comparisons/chatgpt-plus-vs-pro/,mapped
+Codex 怎么用,Codex 使用,codex,informational,high,/guides/codex/,mapped
+Codex 达到限制,Codex 使用限制,codex,troubleshooting,medium,/problems/codex-usage-limits/,mapped

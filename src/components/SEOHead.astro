@@ -1,0 +1,84 @@
+---
+import { siteConfig } from '../config/site';
+import { absoluteUrl } from '../seo/schema';
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonicalPath?: string;
+  image?: string;
+  noindex?: boolean;
+  pageType?: 'website' | 'article';
+  publishedTime?: Date;
+  modifiedTime?: Date;
+  author?: string;
+}
+
+const {
+  title = siteConfig.seo.defaultTitle,
+  description = siteConfig.seo.defaultDescription,
+  canonicalPath = Astro.url.pathname,
+  image = siteConfig.seo.defaultOgImage,
+  noindex = false,
+  pageType = 'website',
+  publishedTime,
+  modifiedTime,
+  author,
+} = Astro.props;
+
+const fullTitle = title === siteConfig.seo.defaultTitle
+  ? title
+  : siteConfig.seo.titleTemplate.replace('%s', title);
+const canonical = siteConfig.seo.canonical === 'auto'
+  ? absoluteUrl(canonicalPath)
+  : absoluteUrl(canonicalPath);
+const imageUrl = absoluteUrl(image);
+const verificationMetaNames: Record<string, string> = {
+  google: 'google-site-verification',
+  bing: 'msvalidate.01',
+  baidu: 'baidu-site-verification',
+  so360: '360-site-verification',
+  sogou: 'sogou_site_verification',
+  shenma: 'shenma-site-verification',
+};
+const verificationTags = Object.entries(siteConfig.searchEngines)
+  .filter(([, engine]) => engine.enabled)
+  .map(([id, engine]) => {
+    const verification = engine.verification;
+    if (verification.method === 'meta' && verification.metaName && verification.value) {
+      return { name: verification.metaName, content: verification.value };
+    }
+    if (engine.verificationCode && verificationMetaNames[id]) {
+      return { name: verificationMetaNames[id], content: engine.verificationCode };
+    }
+    return null;
+  })
+  .filter((item): item is { name: string; content: string } => Boolean(item));
+---
+
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large'} />
+<link rel="canonical" href={canonical} />
+<link rel="alternate" hreflang={siteConfig.site.language} href={canonical} />
+<link rel="alternate" hreflang="x-default" href={canonical} />
+
+<meta property="og:type" content={pageType} />
+<meta property="og:site_name" content={siteConfig.site.name} />
+<meta property="og:locale" content={siteConfig.site.locale} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={imageUrl} />
+<meta property="og:image:alt" content={`${title} - ${siteConfig.site.name}`} />
+
+<meta name="twitter:card" content={siteConfig.seo.twitterCard} />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageUrl} />
+
+{verificationTags.map((tag) => <meta name={tag.name} content={tag.content} />)}
+
+{pageType === 'article' && publishedTime && <meta property="article:published_time" content={publishedTime.toISOString()} />}
+{pageType === 'article' && modifiedTime && <meta property="article:modified_time" content={modifiedTime.toISOString()} />}
+{pageType === 'article' && author && <meta name="author" content={author} />}

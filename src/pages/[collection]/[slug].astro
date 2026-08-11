@@ -1,0 +1,49 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ContentLayout from '../../layouts/ContentLayout.astro';
+import { siteConfig } from '../../config/site';
+import { articleSchema, breadcrumbSchema, faqSchema, webPageSchema } from '../../seo/schema';
+import { COLLECTION_LABELS, contentPath, getPublishedContent, getRelatedContent, type AnyContentEntry } from '../../utils/content';
+
+export async function getStaticPaths() {
+  const entries = await getPublishedContent();
+  return entries.map((entry) => ({
+    params: { collection: entry.collection, slug: entry.data.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props as { entry: AnyContentEntry };
+const { Content, headings } = await render(entry);
+const allEntries = await getPublishedContent();
+const related = getRelatedContent(entry, allEntries, siteConfig.content.relatedArticleCount);
+const path = contentPath(entry);
+const breadcrumbs = [
+  { name: '首页', path: '/' },
+  { name: COLLECTION_LABELS[entry.collection], path: `/${entry.collection}/` },
+  { name: entry.data.title, path },
+];
+const schemas: Array<Record<string, unknown>> = [
+  webPageSchema({ title: entry.data.title, description: entry.data.description, path }),
+  articleSchema(entry),
+  breadcrumbSchema(breadcrumbs),
+];
+if (entry.data.faq.length > 0) schemas.push(faqSchema(entry.data.faq));
+---
+
+<BaseLayout
+  title={entry.data.title}
+  description={entry.data.description}
+  canonicalPath={path}
+  noindex={entry.data.noindex}
+  pageType="article"
+  publishedTime={entry.data.date}
+  modifiedTime={entry.data.updated}
+  author={entry.data.author}
+  schema={schemas}
+>
+  <ContentLayout entry={entry} headings={headings} related={related}>
+    <Content />
+  </ContentLayout>
+</BaseLayout>

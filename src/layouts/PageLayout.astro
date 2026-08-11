@@ -1,0 +1,37 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { breadcrumbSchema, webPageSchema } from '../seo/schema';
+import { siteConfig } from '../config/site';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  schemaType?: 'WebPage' | 'CollectionPage' | 'AboutPage' | 'ContactPage';
+  noindex?: boolean;
+}
+
+const { title, description, path, schemaType = 'WebPage', noindex = false } = Astro.props;
+const breadcrumbs = [
+  { name: '首页', path: '/' },
+  { name: title, path },
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath={path}
+  noindex={noindex}
+  schema={[webPageSchema({ title, description, path, type: schemaType }), breadcrumbSchema(breadcrumbs)]}
+>
+  <div class="container">
+    {siteConfig.features.breadcrumbs && <Breadcrumbs items={breadcrumbs} />}
+    <header class="page-header">
+      <h1>{title}</h1>
+      <p>{description}</p>
+    </header>
+    <div class="page-content"><slot /></div>
+  </div>
+</BaseLayout>

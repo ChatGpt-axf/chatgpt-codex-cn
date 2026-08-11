@@ -1,0 +1,26 @@
+---
+interface Item {
+  name: string;
+  path: string;
+}
+
+import { withBasePath } from '../utils/url';
+
+interface Props {
+  items: Item[];
+}
+
+const { items } = Astro.props;
+---
+
+<nav class="breadcrumbs" aria-label="面包屑导航">
+  <ol>
+    {items.map((item, index) => (
+      <li>
+        {index < items.length - 1
+          ? <a href={withBasePath(item.path)}>{item.name}</a>
+          : <span aria-current="page">{item.name}</span>}
+      </li>
+    ))}
+  </ol>
+</nav>

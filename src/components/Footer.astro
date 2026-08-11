@@ -1,0 +1,25 @@
+---
+import { siteConfig } from '../config/site';
+import { withBasePath } from '../utils/url';
+---
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <a class="brand footer-brand" href={withBasePath('/')}>
+        <img src={withBasePath(siteConfig.site.logo)} width="36" height="36" alt="" loading="lazy" />
+        <span>{siteConfig.site.name}</span>
+      </a>
+      <p>{siteConfig.site.description}</p>
+    </div>
+    <nav aria-label="页脚导航">
+      {siteConfig.navigation.footer.map((item) => <a href={withBasePath(item.url)}>{item.label}</a>)}
+      {siteConfig.features.rss && <a href={withBasePath('/rss.xml')}>RSS</a>}
+      <a href={withBasePath('/llms.txt')}>llms.txt</a>
+    </nav>
+  </div>
+  <div class="container footer-bottom">
+    <span>© {new Date().getFullYear()} {siteConfig.organization.name}</span>
+    <span>内容以来源与更新时间为准</span>
+  </div>
+</footer>

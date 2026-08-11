@@ -1,0 +1,195 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContentCard from '../components/ContentCard.astro';
+import { siteConfig } from '../config/site';
+import { getEntities } from '../utils/entities';
+import { contentPath, getPublishedContent } from '../utils/content';
+import { faqSchema, organizationSchema, webPageSchema, websiteSchema } from '../seo/schema';
+import { withBasePath } from '../utils/url';
+
+const entries = await getPublishedContent();
+const pillars = entries.filter((entry) => entry.data.pillar).slice(0, 4);
+const featured = entries.filter((entry) => entry.data.featured).slice(0, 3);
+const problems = entries.filter((entry) => entry.collection === 'problems').slice(0, 3);
+const comparisons = entries.filter((entry) => entry.collection === 'comparisons').slice(0, 3);
+const latest = entries.slice(0, 3);
+const entities = getEntities().slice(0, 5);
+const homeFaq = entries.flatMap((entry) => entry.data.faq).slice(0, 4);
+const pillarHubs = [
+  { title: 'ChatGPT', description: '中文教程、常见问题与结果核验方法。', path: '/chatgpt/' },
+  { title: 'ChatGPT Plus', description: '适用人群、任务强度与购买前核对。', path: '/chatgpt-plus/' },
+  { title: 'ChatGPT Pro', description: '高强度个人使用场景与方案比较。', path: '/chatgpt-pro/' },
+  { title: 'Codex', description: '代理式开发、仓库工作流与问题排查。', path: '/codex/' },
+  { title: 'AI 工具', description: '按真实任务选择和验证 AI 工具。', path: '/ai-tools/' },
+];
+const schemas: Array<Record<string, unknown>> = [
+  websiteSchema(),
+  organizationSchema(),
+  webPageSchema({ title: siteConfig.seo.defaultTitle, description: siteConfig.seo.defaultDescription, path: '/' }),
+];
+if (homeFaq.length > 0) schemas.push(faqSchema(homeFaq));
+const heroImage = `url("${withBasePath(siteConfig.seo.defaultOgImage)}")`;
+---
+
+<BaseLayout
+  title={siteConfig.seo.defaultTitle}
+  description={siteConfig.seo.defaultDescription}
+  canonicalPath="/"
+  schema={schemas}
+>
+  <section class="hero" style={`--hero-image: ${heroImage}`}>
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <span class="hero-kicker">清晰答案 · 可靠来源 · 持续更新</span>
+      <h1>{siteConfig.site.name}</h1>
+      <p>{siteConfig.site.description}</p>
+      <div class="hero-actions">
+        <a class="primary-action" href={withBasePath('/guides/')}>浏览实用指南</a>
+        {siteConfig.features.search && <a class="secondary-action" href={withBasePath('/search/')}>搜索知识库</a>}
+      </div>
+    </div>
+  </section>
+
+  <section class="value-band">
+    <div class="container value-grid">
+      <div><strong>先给答案</strong><span>重要页面先回应核心问题，再展开背景与方法。</span></div>
+      <div><strong>来源透明</strong><span>事实型内容标明出处、作者和最后更新时间。</span></div>
+      <div><strong>主题相连</strong><span>Pillar 与 Cluster 共同组织知识，不堆砌孤立页面。</span></div>
+    </div>
+  </section>
+
+  <section class="home-section container">
+    <div class="section-heading">
+      <div><span class="eyebrow">Topic Hubs</span><h2>核心主题入口</h2></div>
+      <p>从主题中心进入教程、方案对比、常见问题和故障排查，形成可以持续扩展的内容集群。</p>
+    </div>
+    <div class="pillar-grid">
+      {pillarHubs.map((item, index) => (
+        <a class="pillar-item" href={withBasePath(item.path)}>
+          <span>{String(index + 1).padStart(2, '0')}</span>
+          <div><h3>{item.title}</h3><p>{item.description}</p></div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  {pillars.length > 0 && (
+    <section class="home-section container">
+      <div class="section-heading">
+        <div><span class="eyebrow">Pillars</span><h2>核心主题</h2></div>
+        <p>从主题入口开始，逐步找到功能说明、操作指南、差异对比和问题解决方法。</p>
+      </div>
+      <div class="pillar-grid">
+        {pillars.map((entry, index) => (
+          <a class="pillar-item" href={contentPath(entry)}>
+            <span>{String(index + 1).padStart(2, '0')}</span>
+            <div><h3>{entry.data.title}</h3><p>{entry.data.directAnswer}</p></div>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+
+  {featured.length > 0 && (
+    <section class="home-section section-tint">
+      <div class="container">
+        <div class="section-heading"><div><span class="eyebrow">Featured</span><h2>热门指南</h2></div><a class="text-link" href={withBasePath('/guides/')}>全部指南 →</a></div>
+        <div class="card-grid">{featured.map((entry) => <ContentCard entry={entry} />)}</div>
+      </div>
+    </section>
+  )}
+
+  {problems.length > 0 && (
+    <section class="home-section container">
+      <div class="section-heading"><div><span class="eyebrow">Troubleshooting</span><h2>问题解决专区</h2></div><a class="text-link" href={withBasePath('/problems/')}>查看全部 →</a></div>
+      <div class="card-grid">{problems.map((entry) => <ContentCard entry={entry} />)}</div>
+    </section>
+  )}
+
+  {comparisons.length > 0 && (
+    <section class="home-section section-blue">
+      <div class="container">
+        <div class="section-heading"><div><span class="eyebrow">Comparisons</span><h2>对比专区</h2></div><a class="text-link" href={withBasePath('/comparisons/')}>查看全部 →</a></div>
+        <div class="card-grid">{comparisons.map((entry) => <ContentCard entry={entry} />)}</div>
+      </div>
+    </section>
+  )}
+
+  <section class="home-section container">
+    <div class="section-heading"><div><span class="eyebrow">Recently Updated</span><h2>最近更新</h2></div></div>
+    <div class="card-grid">{latest.map((entry) => <ContentCard entry={entry} />)}</div>
+  </section>
+
+  {homeFaq.length > 0 && (
+    <section class="home-section faq-band">
+      <div class="container faq-home-grid">
+        <div><span class="eyebrow">FAQ</span><h2>常见问题</h2><p>简短回答高频问题，并链接到更完整的主题页面。</p></div>
+        <div>{homeFaq.map((item) => <details><summary>{item.question}</summary><p>{item.answer}</p></details>)}</div>
+      </div>
+    </section>
+  )}
+
+  <section class="home-section container about-grid">
+    <div><span class="eyebrow">About</span><h2>为真实搜索任务组织内容</h2></div>
+    <div><p>{siteConfig.organization.description} 我们优先引用原始来源，不伪造测试、评价或合作关系，并在内容发生实质变化时更新页面。</p><a class="text-link" href={withBasePath('/editorial-policy/')}>查看编辑规范 →</a></div>
+  </section>
+
+  {entities.length > 0 && (
+    <section class="home-section entity-band">
+      <div class="container">
+        <div class="section-heading"><div><span class="eyebrow">Entities</span><h2>重要实体</h2></div></div>
+        <div class="entity-list">{entities.map((entity) => <a href={withBasePath(`/entities/${entity.id}/`)}><strong>{entity.name}</strong><span>{entity.description}</span></a>)}</div>
+      </div>
+    </section>
+  )}
+</BaseLayout>
+
+<style>
+  .hero { position: relative; min-height: min(620px, 68vh); display: grid; align-items: end; overflow: hidden; background: #163d32 var(--hero-image) center/cover no-repeat; color: white; }
+  .hero-overlay { position: absolute; inset: 0; background: rgba(8, 31, 24, 0.62); }
+  .hero-content { position: relative; z-index: 1; padding-block: 76px; }
+  .hero-kicker { display: block; margin-bottom: 14px; color: #bcefd6; font-size: 0.82rem; font-weight: 800; }
+  .hero h1 { max-width: 850px; margin: 0; font-size: clamp(2.7rem, 8vw, 5.5rem); line-height: 1.02; }
+  .hero p { max-width: 720px; margin: 22px 0 0; color: #e0eee7; font-size: clamp(1.05rem, 2.5vw, 1.35rem); }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+  .hero-actions a { display: inline-flex; min-height: 46px; align-items: center; padding: 10px 17px; border-radius: 6px; font-weight: 750; text-decoration: none; }
+  .primary-action { background: #f3fcf7; color: #075e43; }
+  .secondary-action { border: 1px solid rgba(255,255,255,.58); color: white; }
+  .value-band { border-bottom: 1px solid var(--color-border); background: white; }
+  .value-grid { display: grid; gap: 0; }
+  .value-grid div { display: grid; gap: 4px; padding: 22px 0; border-bottom: 1px solid var(--color-border); }
+  .value-grid div:last-child { border-bottom: 0; }
+  .value-grid span { color: var(--color-muted); font-size: 0.9rem; }
+  .home-section { padding-block: 70px; }
+  .section-tint { background: #eef4f0; }
+  .section-blue { background: #eef5fb; }
+  .pillar-grid { border-top: 1px solid var(--color-border); }
+  .pillar-item { display: grid; grid-template-columns: 40px 1fr; gap: 14px; padding: 24px 0; border-bottom: 1px solid var(--color-border); text-decoration: none; }
+  .pillar-item > span { color: var(--color-primary); font-weight: 800; }
+  .pillar-item h3 { margin: 0; font-size: 1.22rem; }
+  .pillar-item p { margin: 6px 0 0; color: var(--color-muted); }
+  .pillar-item:hover h3 { color: var(--color-primary); }
+  .faq-band { background: #152921; color: white; }
+  .faq-home-grid { display: grid; gap: 32px; }
+  .faq-home-grid h2 { margin: 0; font-size: 2rem; }
+  .faq-home-grid > div:first-child p { color: #b9c9c1; }
+  .faq-home-grid details { border-bottom: 1px solid #3c5148; }
+  .faq-home-grid summary { padding: 17px 0; cursor: pointer; font-weight: 750; }
+  .faq-home-grid details p { margin: 0 0 18px; color: #cbd8d1; }
+  .about-grid { display: grid; gap: 24px; }
+  .about-grid h2 { margin: 0; font-size: 2rem; }
+  .about-grid p { margin-top: 0; color: var(--color-muted); }
+  .entity-band { background: white; border-block: 1px solid var(--color-border); }
+  .entity-list { display: grid; gap: 1px; background: var(--color-border); border: 1px solid var(--color-border); }
+  .entity-list a { display: grid; gap: 4px; padding: 17px; background: white; text-decoration: none; }
+  .entity-list a:hover strong { color: var(--color-primary); }
+  .entity-list span { color: var(--color-muted); font-size: .88rem; }
+  @media (min-width: 720px) {
+    .value-grid { grid-template-columns: repeat(3, 1fr); }
+    .value-grid div { padding: 24px; border-right: 1px solid var(--color-border); border-bottom: 0; }
+    .value-grid div:first-child { padding-left: 0; }
+    .value-grid div:last-child { padding-right: 0; border-right: 0; }
+    .faq-home-grid, .about-grid { grid-template-columns: .8fr 1.2fr; }
+    .entity-list { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>

@@ -1,0 +1,26 @@
+---
+import PillarLanding from '../components/PillarLanding.astro';
+---
+
+<PillarLanding
+  title="Codex 中文教程与开发指南"
+  description="从任务拆分、仓库上下文、代码修改到验证交付，系统整理 Codex 中文使用方法与问题排查。"
+  path="/codex/"
+  eyebrow="Codex Pillar"
+  directAnswer="Codex 是面向软件开发工作的 AI 编码代理。有效使用 Codex 需要明确仓库范围、目标和验收标准，让代理先理解现有代码，再完成修改、测试和结果说明。"
+  takeaways={[
+    '任务中写清工作目录、限制条件和验收命令。',
+    '让代码修改与测试验证形成完整闭环。',
+    '区分账户限制、连接问题、权限问题和代码本身的错误。',
+  ]}
+  sections={[
+    { title: '推荐工作流', body: '先读取项目约束和相关模块，再执行小范围修改；完成后运行类型检查、测试和构建，并说明仍需人工确认的外部状态。' },
+    { title: '风险边界', body: '涉及删除、生产部署、密钥、权限或不可逆操作时，需要额外确认。生成代码不能替代真实环境验证和代码审查。' },
+  ]}
+  links={[
+    { title: 'Codex 使用指南', description: '从仓库上下文到验证交付的完整方法。', path: '/guides/codex/' },
+    { title: 'Codex 使用限制排查', description: '区分额度、连接、权限和环境错误。', path: '/problems/codex-usage-limits/' },
+    { title: 'AI 编码代理', description: '理解代理式开发工具的核心概念。', path: '/concepts/ai-coding-agent/' },
+    { title: 'AI 工具中心', description: '查看其他 AI 工具主题与选择方法。', path: '/ai-tools/' },
+  ]}
+/>

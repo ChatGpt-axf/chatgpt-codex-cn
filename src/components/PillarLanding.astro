@@ -1,0 +1,84 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from './Breadcrumbs.astro';
+import { breadcrumbSchema, webPageSchema } from '../seo/schema';
+import { siteConfig } from '../config/site';
+import { withBasePath } from '../utils/url';
+
+interface LinkItem { title: string; description: string; path: string }
+interface SectionItem { title: string; body: string }
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  eyebrow: string;
+  directAnswer: string;
+  takeaways: string[];
+  sections: SectionItem[];
+  links: LinkItem[];
+}
+
+const { title, description, path, eyebrow, directAnswer, takeaways, sections, links } = Astro.props;
+const breadcrumbs = [{ name: '首页', path: '/' }, { name: title, path }];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath={path}
+  schema={[webPageSchema({ title, description, path }), breadcrumbSchema(breadcrumbs)]}
+>
+  <div class="container pillar-shell">
+    {siteConfig.features.breadcrumbs && <Breadcrumbs items={breadcrumbs} />}
+    <header class="pillar-header">
+      <span class="eyebrow">{eyebrow}</span>
+      <h1>{title}</h1>
+      <p>{description}</p>
+    </header>
+
+    <section class="direct-answer" aria-labelledby="pillar-answer">
+      <h2 id="pillar-answer">直接答案</h2>
+      <p>{directAnswer}</p>
+    </section>
+
+    <section class="pillar-section" aria-labelledby="pillar-takeaways">
+      <h2 id="pillar-takeaways">本主题包含什么</h2>
+      <ul>{takeaways.map((item) => <li>{item}</li>)}</ul>
+    </section>
+
+    {sections.map((section) => (
+      <section class="pillar-section">
+        <h2>{section.title}</h2>
+        <p>{section.body}</p>
+      </section>
+    ))}
+
+    <section class="pillar-section related-topics" aria-labelledby="pillar-related">
+      <h2 id="pillar-related">继续阅读</h2>
+      <div>
+        {links.map((item) => (
+          <a href={withBasePath(item.path)}>
+            <strong>{item.title}</strong>
+            <span>{item.description}</span>
+          </a>
+        ))}
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .pillar-shell { max-width: 980px; padding-bottom: 72px; }
+  .pillar-header { max-width: 820px; padding-block: 54px 36px; }
+  .pillar-header h1 { margin: 8px 0 14px; font-size: clamp(2.2rem, 6vw, 4rem); line-height: 1.08; }
+  .pillar-header p { margin: 0; color: var(--color-muted); font-size: 1.12rem; }
+  .pillar-section { padding-block: 30px; border-bottom: 1px solid var(--color-border); }
+  .pillar-section h2 { margin-top: 0; font-size: 1.55rem; }
+  .pillar-section p, .pillar-section li { color: var(--color-muted); }
+  .pillar-section li + li { margin-top: 8px; }
+  .related-topics > div { display: grid; gap: 1px; border: 1px solid var(--color-border); background: var(--color-border); }
+  .related-topics a { display: grid; gap: 5px; padding: 18px; background: white; text-decoration: none; }
+  .related-topics a:hover strong { color: var(--color-primary); }
+  .related-topics span { color: var(--color-muted); font-size: .92rem; }
+  @media (min-width: 720px) { .related-topics > div { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+</style>

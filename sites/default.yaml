@@ -1,0 +1,134 @@
+site:
+  id: default
+  name: Knowledge Site
+  shortName: Knowledge
+  domain: knowledge.example
+  baseUrl: https://knowledge.example
+  basePath: /
+  publicUrl: https://knowledge.example/
+  brand: Knowledge
+  conversionUrl: https://knowledge.example/
+  status: draft
+  publishMethod: static-subdirectory
+  adminUrl: https://seo.knowledge.example/
+  url: https://knowledge.example
+  base: /
+  language: zh-CN
+  locale: zh_CN
+  description: 一个面向真实问题、强调清晰答案与可靠来源的知识站点。
+  logo: /images/site-logo.svg
+  favicon: /favicon/favicon.svg
+
+brand:
+  primaryColor: '#087f5b'
+  secondaryColor: '#0b6bcb'
+  backgroundColor: '#f7faf8'
+  textColor: '#17221d'
+  mutedColor: '#5f6f67'
+  borderColor: '#d7e2dc'
+
+organization:
+  name: Knowledge Editorial Team
+  legalName: Knowledge Editorial Team
+  description: 维护内容质量、来源与更新记录的编辑团队。
+  logo: /images/site-logo.svg
+  email: editor@knowledge.example
+
+seo:
+  defaultTitle: Knowledge Site
+  titleTemplate: '%s | Knowledge Site'
+  defaultDescription: 提供结构清晰、来源透明、持续更新的实用知识内容。
+  defaultOgImage: /images/knowledge-network.webp
+  twitterCard: summary_large_image
+  canonical: auto
+  indexNowEnabled: false
+  siteUpdated: 2026-08-08
+  aiCrawlerPolicy: allow
+
+navigation:
+  header:
+    - label: 首页
+      url: /
+    - label: 指南
+      url: /guides/
+    - label: 对比
+      url: /comparisons/
+    - label: 问题解决
+      url: /problems/
+    - label: 常见问题
+      url: /faq/
+  footer:
+    - label: 核心概念
+      url: /concepts/
+    - label: 更新动态
+      url: /news/
+    - label: 关于
+      url: /about/
+    - label: 联系
+      url: /contact/
+    - label: 编辑规范
+      url: /editorial-policy/
+    - label: 隐私
+      url: /privacy/
+    - label: 条款
+      url: /terms/
+
+content:
+  author: 编辑团队
+  publisher: Knowledge Site
+  defaultConversionLevel: soft
+  showLastUpdated: true
+  showSources: true
+  showRelatedArticles: true
+  relatedArticleCount: 4
+
+features:
+  rss: true
+  sitemap: true
+  search: true
+  breadcrumbs: true
+  tableOfContents: true
+  relatedContent: true
+
+analytics:
+  enabled: false
+  provider: none
+  id: ''
+
+searchEngines:
+  google:
+    enabled: true
+    verificationCode: ''
+    verification: &emptyVerification
+      method: none
+      metaName: ''
+      value: ''
+      fileName: ''
+      fileContent: ''
+      dnsRecord: ''
+  bing:
+    enabled: true
+    indexNow: true
+    verificationCode: ''
+    verification: *emptyVerification
+  baidu:
+    enabled: true
+    verificationCode: ''
+    verification: *emptyVerification
+  so360:
+    enabled: true
+    verificationCode: ''
+    verification: *emptyVerification
+  sogou:
+    enabled: true
+    verificationCode: ''
+    verification: *emptyVerification
+  shenma:
+    enabled: true
+    verificationCode: ''
+    verification: *emptyVerification
+  ai:
+    enabled: true
+    openAiSearchBot: true
+    verificationCode: ''
+    verification: *emptyVerification

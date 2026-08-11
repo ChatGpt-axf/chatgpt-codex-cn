@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ContentCard from '../../components/ContentCard.astro';
+import { siteConfig } from '../../config/site';
+import { breadcrumbSchema, webPageSchema } from '../../seo/schema';
+import { getPublishedContent } from '../../utils/content';
+import { getEntities, type Entity } from '../../utils/entities';
+
+export async function getStaticPaths() {
+  return getEntities().map((entity) => ({ params: { entity: entity.id }, props: { entity } }));
+}
+
+const { entity } = Astro.props as { entity: Entity };
+const entries = (await getPublishedContent()).filter((entry) => entry.data.entity.includes(entity.id));
+const path = `/entities/${entity.id}/`;
+const title = entity.name;
+const description = entity.description;
+const breadcrumbs = [{ name: '首页', path: '/' }, { name: title, path }];
+---
+
+<BaseLayout title={title} description={description} canonicalPath={path} schema={[webPageSchema({ title, description, path, type: 'CollectionPage' }), breadcrumbSchema(breadcrumbs)]}>
+  <div class="container">
+    {siteConfig.features.breadcrumbs && <Breadcrumbs items={breadcrumbs} />}
+    <header class="page-header"><span class="eyebrow">{entity.type}</span><h1>{title}</h1><p>{description}</p></header>
+    <section class="entity-detail">
+      <dl><div><dt>别名</dt><dd>{entity.aliases.join('、') || '无'}</dd></div><div><dt>官方来源</dt><dd><a href={entity.officialUrl} rel="noopener noreferrer">访问官方页面</a></dd></div></dl>
+      <h2>相关内容</h2>
+      {entries.length > 0 ? <div class="card-grid">{entries.map((entry) => <ContentCard entry={entry} />)}</div> : <p class="empty-state">相关内容正在整理。</p>}
+    </section>
+  </div>
+</BaseLayout>
+<style>
+  .entity-detail { padding-block: 40px; }
+  dl { margin: 0 0 40px; border-top: 1px solid var(--color-border); }
+  dl div { display: grid; grid-template-columns: 100px 1fr; padding: 12px 0; border-bottom: 1px solid var(--color-border); }
+  dt { font-weight: 750; } dd { margin: 0; color: var(--color-muted); } dd a { color: var(--color-secondary); }
+</style>

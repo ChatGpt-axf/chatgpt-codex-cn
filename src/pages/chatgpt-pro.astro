@@ -1,0 +1,26 @@
+---
+import PillarLanding from '../components/PillarLanding.astro';
+---
+
+<PillarLanding
+  title="ChatGPT Pro 中文指南"
+  description="解释 ChatGPT Pro 的高强度个人使用定位、选择条件，以及与 Plus 比较时应采用的标准。"
+  path="/chatgpt-pro/"
+  eyebrow="ChatGPT Pro Pillar"
+  directAnswer="ChatGPT Pro 更适合高频、长时间连续使用，并且能从更高访问空间或特定权益中获得明确工作价值的个人。职业身份本身不是升级理由，应以实际任务、中断成本和当前官方权益为准。"
+  takeaways={[
+    '先确认更高访问空间能否减少真实工作中断。',
+    '个人高强度使用与团队治理需求应分别评估。',
+    '动态权益和价格必须在购买时重新核对。',
+  ]}
+  sections={[
+    { title: '选择条件', body: '适合度来自稳定发生的任务，而不是对未来可能使用功能的猜测。可以按月记录使用天数、任务完成量、等待时间和交付影响。' },
+    { title: '与团队方案的区别', body: '多人权限、管理、合规和组织数据控制属于另一类需求，不应仅通过升级个人方案解决。' },
+  ]}
+  links={[
+    { title: 'Plus 与 Pro 对比', description: '按强度、连续性和预算进行比较。', path: '/comparisons/chatgpt-plus-vs-pro/' },
+    { title: 'ChatGPT Plus', description: '了解中等强度个人使用的判断方法。', path: '/chatgpt-plus/' },
+    { title: 'ChatGPT 主题中心', description: '查看完整教程和常见问题。', path: '/chatgpt/' },
+    { title: 'ChatGPT 常见问题', description: '核对功能、账户和数据使用边界。', path: '/faq/chatgpt-faq/' },
+  ]}
+/>

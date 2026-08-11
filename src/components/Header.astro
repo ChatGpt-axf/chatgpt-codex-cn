@@ -1,0 +1,24 @@
+---
+import { siteConfig } from '../config/site';
+import { withBasePath } from '../utils/url';
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href={withBasePath('/')} aria-label={`${siteConfig.site.name}首页`}>
+      <img src={withBasePath(siteConfig.site.logo)} width="40" height="40" alt="" />
+      <span>{siteConfig.site.shortName}</span>
+    </a>
+    <nav class="desktop-nav" aria-label="主导航">
+      {siteConfig.navigation.header.map((item) => <a href={withBasePath(item.url)}>{item.label}</a>)}
+      {siteConfig.features.search && <a class="search-link" href={withBasePath('/search/')}>搜索</a>}
+    </nav>
+    <details class="mobile-nav">
+      <summary aria-label="打开导航"><span aria-hidden="true">☰</span><span class="sr-only">菜单</span></summary>
+      <nav aria-label="移动端主导航">
+        {siteConfig.navigation.header.map((item) => <a href={withBasePath(item.url)}>{item.label}</a>)}
+        {siteConfig.features.search && <a href={withBasePath('/search/')}>搜索</a>}
+      </nav>
+    </details>
+  </div>
+</header>

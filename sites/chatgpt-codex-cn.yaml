@@ -1,0 +1,138 @@
+site:
+  id: chatgpt-codex-cn
+  name: ChatGPT & Codex 中文指南
+  shortName: ChatGPT Codex 指南
+  domain: pending-domain.invalid
+  baseUrl: https://pending-domain.invalid
+  basePath: /
+  publicUrl: https://pending-domain.invalid/
+  brand: ChatGPT & Codex 中文指南
+  conversionUrl: https://cwx.aixufei.com/
+  status: setup
+  publishMethod: git_cloudflare_pages
+  adminUrl: https://seo.pending-domain.invalid/
+  url: https://pending-domain.invalid
+  base: /
+  language: zh-CN
+  locale: zh_CN
+  description: 面向中文用户的 ChatGPT、ChatGPT Plus、ChatGPT Pro、Codex 与 AI 工具实用教程站，重点提供版本比较、订阅准备、额度问题、开发者指南和常见故障解决。
+  logo: /images/site-logo.svg
+  favicon: /favicon/favicon.svg
+
+brand:
+  primaryColor: '#087f5b'
+  secondaryColor: '#1769aa'
+  backgroundColor: '#f7faf8'
+  textColor: '#17221d'
+  mutedColor: '#5f6f67'
+  borderColor: '#d7e2dc'
+
+organization:
+  name: ChatGPT & Codex 中文指南编辑部
+  legalName: ChatGPT & Codex 中文指南编辑部
+  description: 维护 ChatGPT、Codex 与 AI 工具实用教程、版本比较、问题解决和开发者指南的中文内容团队。
+  logo: /images/site-logo.svg
+  email: editor@pending-domain.invalid
+
+seo:
+  defaultTitle: ChatGPT & Codex 中文指南
+  titleTemplate: '%s | ChatGPT & Codex 中文指南'
+  defaultDescription: 提供 ChatGPT、ChatGPT Plus、ChatGPT Pro、Codex 与 AI 工具的中文实用教程、版本选择、额度问题、故障解决和开发者指南。
+  defaultOgImage: /images/knowledge-network.webp
+  twitterCard: summary_large_image
+  canonical: pending-domain-required
+  indexNowEnabled: false
+  siteUpdated: 2026-08-11
+  aiCrawlerPolicy: allow
+
+navigation:
+  header:
+    - label: 首页
+      url: /
+    - label: ChatGPT
+      url: /chatgpt/
+    - label: Codex
+      url: /codex/
+    - label: Plus / Pro
+      url: /comparisons/
+    - label: 故障解决
+      url: /problems/
+    - label: 开发者指南
+      url: /guides/
+  footer:
+    - label: ChatGPT Plus
+      url: /chatgpt-plus/
+    - label: Codex
+      url: /codex/
+    - label: 常见问题
+      url: /faq/
+    - label: 关于
+      url: /about/
+    - label: 联系
+      url: /contact/
+    - label: 编辑规范
+      url: /editorial-policy/
+    - label: 隐私
+      url: /privacy/
+    - label: 条款
+      url: /terms/
+
+content:
+  author: ChatGPT & Codex 中文指南编辑部
+  publisher: ChatGPT & Codex 中文指南
+  defaultConversionLevel: soft
+  showLastUpdated: true
+  showSources: true
+  showRelatedArticles: true
+  relatedArticleCount: 4
+
+features:
+  rss: true
+  sitemap: true
+  search: true
+  breadcrumbs: true
+  tableOfContents: true
+  relatedContent: true
+
+analytics:
+  enabled: false
+  provider: none
+  id: ''
+
+searchEngines:
+  google:
+    enabled: true
+    verificationCode: ''
+    verification: &emptyVerification
+      method: none
+      metaName: ''
+      value: ''
+      fileName: ''
+      fileContent: ''
+      dnsRecord: ''
+  bing:
+    enabled: true
+    indexNow: false
+    verificationCode: ''
+    verification: *emptyVerification
+  baidu:
+    enabled: true
+    verificationCode: ''
+    verification: *emptyVerification
+  so360:
+    enabled: false
+    verificationCode: ''
+    verification: *emptyVerification
+  sogou:
+    enabled: false
+    verificationCode: ''
+    verification: *emptyVerification
+  shenma:
+    enabled: false
+    verificationCode: ''
+    verification: *emptyVerification
+  ai:
+    enabled: true
+    openAiSearchBot: false
+    verificationCode: ''
+    verification: *emptyVerification

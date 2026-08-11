@@ -1,0 +1,112 @@
+---
+import type { AnyContentEntry } from '../utils/content';
+import { COLLECTION_LABELS, contentPath, formatDate, toUrlSegment } from '../utils/content';
+import { siteConfig } from '../config/site';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import ContentCard from '../components/ContentCard.astro';
+import ConversionLink from '../components/ConversionLink.astro';
+import { withBasePath } from '../utils/url';
+
+interface Heading { depth: number; slug: string; text: string }
+interface Props {
+  entry: AnyContentEntry;
+  headings: Heading[];
+  related: AnyContentEntry[];
+}
+
+const { entry, headings, related } = Astro.props;
+const { data } = entry;
+const toc = headings.filter((heading) => heading.depth === 2 || heading.depth === 3);
+---
+
+<div class="container article-shell">
+  {siteConfig.features.breadcrumbs && (
+    <Breadcrumbs items={[
+      { name: '首页', path: '/' },
+      { name: COLLECTION_LABELS[entry.collection], path: `/${entry.collection}/` },
+      { name: data.title, path: contentPath(entry) },
+    ]} />
+  )}
+  <div class="article-grid">
+    <article class="article-main">
+      <header class="article-header">
+        <div class="eyebrow">{data.pillar ? '核心主题' : COLLECTION_LABELS[entry.collection]}</div>
+        <h1>{data.title}</h1>
+        <p class="article-description">{data.description}</p>
+        <div class="article-byline">
+          <span>作者：{data.author}</span>
+          <span>发布：<time datetime={data.date.toISOString()}>{formatDate(data.date, siteConfig.site.language)}</time></span>
+          {siteConfig.content.showLastUpdated && (
+            <span>更新：<time datetime={data.updated.toISOString()}>{formatDate(data.updated, siteConfig.site.language)}</time></span>
+          )}
+        </div>
+      </header>
+
+      <section class="direct-answer" aria-labelledby="direct-answer-heading">
+        <h2 id="direct-answer-heading">直接答案</h2>
+        <p>{data.directAnswer}</p>
+      </section>
+
+      <section class="takeaways" aria-labelledby="takeaways-heading">
+        <h2 id="takeaways-heading">核心结论</h2>
+        <ul>{data.keyTakeaways.map((item) => <li>{item}</li>)}</ul>
+      </section>
+
+      <div class="article-body">
+        <slot />
+      </div>
+
+      {data.faq.length > 0 && (
+        <section class="faq-section" aria-labelledby="faq-heading">
+          <h2 id="faq-heading">常见问题</h2>
+          {data.faq.map((item) => (
+            <details>
+              <summary>{item.question}</summary>
+              <p>{item.answer}</p>
+            </details>
+          ))}
+        </section>
+      )}
+
+      <div class="taxonomy" aria-label="内容分类信息">
+        <a href={withBasePath(`/categories/${toUrlSegment(data.category)}/`)}>{data.category}</a>
+        {data.tags.map((tag) => <a href={withBasePath(`/tags/${toUrlSegment(tag)}/`)}>#{tag}</a>)}
+        {data.entity.map((entity) => <a href={withBasePath(`/entities/${entity}/`)}>{entity}</a>)}
+      </div>
+
+      {siteConfig.content.showSources && data.sources.length > 0 && (
+        <section class="sources" aria-labelledby="sources-heading">
+          <h2 id="sources-heading">参考资料</h2>
+          <ol>
+            {data.sources.map((source) => (
+              <li>
+                <a href={source.url} rel="noopener noreferrer">{source.title}</a>
+                <span>，{source.publisher}，访问于 {formatDate(source.accessed, siteConfig.site.language)}</span>
+              </li>
+            ))}
+          </ol>
+        </section>
+      )}
+
+      <ConversionLink level={data.conversionLevel} />
+    </article>
+
+    {siteConfig.features.tableOfContents && toc.length > 0 && (
+      <aside class="toc" aria-label="文章目录">
+        <strong>本文目录</strong>
+        <ol>
+          {toc.map((heading) => <li class={`depth-${heading.depth}`}><a href={`#${heading.slug}`}>{heading.text}</a></li>)}
+        </ol>
+      </aside>
+    )}
+  </div>
+
+  {siteConfig.features.relatedContent && siteConfig.content.showRelatedArticles && related.length > 0 && (
+    <section class="related-section" aria-labelledby="related-heading">
+      <div class="section-heading">
+        <div><span class="eyebrow">Topic Cluster</span><h2 id="related-heading">相关主题</h2></div>
+      </div>
+      <div class="card-grid">{related.map((item) => <ContentCard entry={item} />)}</div>
+    </section>
+  )}
+</div>

@@ -1,0 +1,49 @@
+---
+import { siteConfig } from '../config/site';
+
+interface Props {
+  level?: 'none' | 'soft' | 'normal';
+}
+
+const { level = siteConfig.content.defaultConversionLevel } = Astro.props;
+const show = level !== 'none' && Boolean(siteConfig.site.conversionUrl);
+const text = level === 'normal'
+  ? `需要订阅、升级或处理国内支付时，可以进入${siteConfig.site.brand}。`
+  : `如果已经产生订阅或升级需求，可以再了解${siteConfig.site.brand}。`;
+---
+
+{show && (
+  <aside class="conversion-link" aria-label="转化入口">
+    <p>{text}</p>
+    <a href={siteConfig.site.conversionUrl} rel="noopener noreferrer" data-link-type="conversion">
+      {siteConfig.site.brand}
+    </a>
+  </aside>
+)}
+
+<style>
+  .conversion-link {
+    margin-top: 34px;
+    padding: 18px 0 0;
+    border-top: 1px solid var(--color-border);
+    color: var(--color-muted);
+  }
+  .conversion-link p {
+    margin: 0 0 10px;
+  }
+  .conversion-link a {
+    display: inline-flex;
+    min-height: 38px;
+    align-items: center;
+    padding: 8px 13px;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    background: white;
+    color: var(--color-primary);
+    font-weight: 750;
+    text-decoration: none;
+  }
+  .conversion-link a:hover {
+    border-color: var(--color-primary);
+  }
+</style>

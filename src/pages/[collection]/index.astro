@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ContentCard from '../../components/ContentCard.astro';
+import { siteConfig } from '../../config/site';
+import { breadcrumbSchema, webPageSchema } from '../../seo/schema';
+import { COLLECTION_LABELS, CONTENT_COLLECTIONS, getPublishedContent, type ContentCollection } from '../../utils/content';
+
+export function getStaticPaths() {
+  return CONTENT_COLLECTIONS.map((collection) => ({ params: { collection }, props: { collection } }));
+}
+
+const { collection } = Astro.props as { collection: ContentCollection };
+const entries = (await getPublishedContent()).filter((entry) => entry.collection === collection);
+const title = COLLECTION_LABELS[collection];
+const descriptions: Record<ContentCollection, string> = {
+  guides: '围绕 AI 工具真实使用任务整理的分步指南，包含适用场景、操作方法、注意事项与可靠来源。',
+  comparisons: '从使用目标、能力边界与选择条件出发，对比相关 AI 产品与功能，避免只看单一参数。',
+  problems: '针对常见报错、限制和使用障碍提供可验证的排查路径，并标明可能变化的产品条件。',
+  faq: '集中回答 ChatGPT、Codex 等 AI 工具的高频问题，并链接到可继续深入阅读的完整主题。',
+  concepts: '解释 AI 产品与功能中的核心概念、实体关系和常用术语，帮助建立清晰的知识框架。',
+  news: '记录值得关注的产品更新与官方公告，优先引用原始信息并注明发布与更新时间。',
+};
+const path = `/${collection}/`;
+const breadcrumbs = [{ name: '首页', path: '/' }, { name: title, path }];
+---
+
+<BaseLayout
+  title={title}
+  description={descriptions[collection]}
+  canonicalPath={path}
+  noindex={entries.length === 0}
+  schema={[webPageSchema({ title, description: descriptions[collection], path, type: 'CollectionPage' }), breadcrumbSchema(breadcrumbs)]}
+>
+  <div class="container">
+    {siteConfig.features.breadcrumbs && <Breadcrumbs items={breadcrumbs} />}
+    <header class="page-header"><h1>{title}</h1><p>{descriptions[collection]}</p></header>
+    <section class="listing-section" aria-label={`${title}内容列表`}>
+      {entries.length > 0 ? <div class="card-grid">{entries.map((entry) => <ContentCard entry={entry} />)}</div> : <p class="empty-state">该栏目正在整理内容。</p>}
+    </section>
+  </div>
+</BaseLayout>
+
+<style>.listing-section { padding-block: 42px; }</style>

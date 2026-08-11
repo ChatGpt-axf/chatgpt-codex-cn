@@ -1,0 +1,26 @@
+---
+import PillarLanding from '../components/PillarLanding.astro';
+---
+
+<PillarLanding
+  title="ChatGPT Plus 中文指南"
+  description="围绕适用人群、任务强度、动态权益和购买前核对事项整理 ChatGPT Plus 中文指南。"
+  path="/chatgpt-plus/"
+  eyebrow="ChatGPT Plus Pillar"
+  directAnswer="ChatGPT Plus 是面向个人用户的付费方案之一，是否值得选择取决于任务频率、连续性要求、所需工具和预算。模型、功能、限制与价格会调整，最终应以官方定价页及账户内显示为准。"
+  takeaways={[
+    '用真实工作负载评估价值，不按功能数量冲动升级。',
+    '把等待和中断造成的时间成本纳入判断。',
+    '购买前同时核对官方定价页、账户权益和地区条件。',
+  ]}
+  sections={[
+    { title: '适合先评估什么', body: '记录一个使用周期内的任务数量、受限次数、文件或工具需求和中断影响，比根据单次体验判断更可靠。' },
+    { title: '动态信息处理', body: '本站不会把某个时间点的价格、模型名称或额度写成长期承诺。发生实质变化时，相关页面会重新核对来源并更新时间。' },
+  ]}
+  links={[
+    { title: 'Plus 选择指南', description: '按任务和预算判断是否需要订阅。', path: '/guides/chatgpt-plus-guide/' },
+    { title: 'Plus 与 Pro 对比', description: '使用统一维度比较两类个人方案。', path: '/comparisons/chatgpt-plus-vs-pro/' },
+    { title: 'ChatGPT 主题中心', description: '返回 ChatGPT 完整学习路径。', path: '/chatgpt/' },
+    { title: 'ChatGPT Pro', description: '继续了解更高强度使用场景。', path: '/chatgpt-pro/' },
+  ]}
+/>
