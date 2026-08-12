@@ -103,6 +103,17 @@ searchEngines:
   google:
     enabled: true
     verificationCode: ''
+    verification:
+      method: html
+      metaName: ''
+      value: ''
+      fileName: googlef5895d853c5bb037.html
+      fileContent: 'google-site-verification: googlef5895d853c5bb037.html'
+      dnsRecord: ''
+  bing:
+    enabled: true
+    indexNow: true
+    verificationCode: ''
     verification: &emptyVerification
       method: none
       metaName: ''
@@ -110,11 +121,6 @@ searchEngines:
       fileName: ''
       fileContent: ''
       dnsRecord: ''
-  bing:
-    enabled: true
-    indexNow: true
-    verificationCode: ''
-    verification: *emptyVerification
   baidu:
     enabled: true
     verificationCode: ''
