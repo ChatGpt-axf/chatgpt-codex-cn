@@ -25,16 +25,35 @@ button, input { font: inherit; }
 .header-inner { min-height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--color-text); font-weight: 800; text-decoration: none; }
 .brand img { flex: 0 0 auto; }
-.desktop-nav { display: none; align-items: center; gap: 22px; font-size: 0.94rem; font-weight: 650; }
+.desktop-nav { display: none; align-items: center; gap: 18px; font-size: 0.94rem; font-weight: 650; }
 .desktop-nav a, .site-footer nav a { text-decoration: none; }
 .desktop-nav a:hover, .site-footer nav a:hover { color: var(--color-primary); }
 .search-link { color: var(--color-secondary); }
+.desktop-nav .nav-cta,
+.mobile-nav nav .nav-cta {
+  display: inline-flex;
+  min-height: 38px;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 13px;
+  border-radius: 6px;
+  background: var(--color-primary);
+  color: white;
+  font-weight: 760;
+  text-decoration: none;
+}
+.desktop-nav .nav-cta:hover,
+.mobile-nav nav .nav-cta:hover {
+  background: #066a4c;
+  color: white;
+}
 .mobile-nav { position: relative; }
 .mobile-nav summary { display: grid; width: 42px; height: 42px; place-items: center; cursor: pointer; border: 1px solid var(--color-border); border-radius: 6px; list-style: none; background: white; font-size: 1.25rem; }
 .mobile-nav summary::-webkit-details-marker { display: none; }
 .mobile-nav nav { position: absolute; top: 52px; right: 0; width: min(270px, calc(100vw - 32px)); padding: 8px; border: 1px solid var(--color-border); border-radius: 8px; background: white; box-shadow: 0 18px 50px rgba(23, 34, 29, 0.14); }
 .mobile-nav nav a { display: block; padding: 10px 12px; border-radius: 5px; text-decoration: none; }
 .mobile-nav nav a:hover { background: var(--color-background); color: var(--color-primary); }
+.mobile-nav nav .nav-cta { margin: 8px 4px 4px; }
 
 .site-footer { margin-top: 88px; border-top: 1px solid var(--color-border); background: #eef4f0; }
 .footer-grid { display: grid; gap: 32px; padding-block: 48px 32px; }
