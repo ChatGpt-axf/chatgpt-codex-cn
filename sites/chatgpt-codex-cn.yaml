@@ -112,7 +112,7 @@ searchEngines:
       dnsRecord: ''
   bing:
     enabled: true
-    indexNow: false
+    indexNow: true
     verificationCode: ''
     verification: *emptyVerification
   baidu:
