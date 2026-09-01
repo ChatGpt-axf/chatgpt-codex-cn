@@ -6,8 +6,11 @@ import { siteConfig } from '../../config/site';
 import { breadcrumbSchema, webPageSchema } from '../../seo/schema';
 import { COLLECTION_LABELS, CONTENT_COLLECTIONS, getPublishedContent, type ContentCollection } from '../../utils/content';
 
-export function getStaticPaths() {
-  return CONTENT_COLLECTIONS.map((collection) => ({ params: { collection }, props: { collection } }));
+export async function getStaticPaths() {
+  const entries = await getPublishedContent();
+  return CONTENT_COLLECTIONS
+    .filter((collection) => entries.some((entry) => entry.collection === collection))
+    .map((collection) => ({ params: { collection }, props: { collection } }));
 }
 
 const { collection } = Astro.props as { collection: ContentCollection };

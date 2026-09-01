@@ -1,18 +1,18 @@
-# ChatGPT & Codex 中文指南
+# 爱续费AI
 
-Astro static site for the first independent prelaunch content site in the AI SEO/GEO content matrix.
+Astro static site shell for `gptaixufei.com`.
 
 ## Status
 
 - Site ID: `chatgpt-codex-cn`
 - Site type: content site
 - Language: `zh-CN`
-- Preview mode: enabled
-- Production publishing: disabled
+- Site status: setup
+- Public content: cleared
 - Indexing: disabled through `noindex` and `robots.txt`
 - Search submission: disabled
-- Planned production domain: `gptaixufei.com`
-- Conversion URL: `https://cwx.aixufei.com/`
+- Domain: `gptaixufei.com`
+- Conversion URL: not used on the public content site
 
 ## Cloudflare Pages
 
@@ -27,7 +27,7 @@ Production branch: main
 Node.js version: 22
 ```
 
-No DNS binding or custom production domain is configured in Cloudflare Pages yet.
+Cloudflare Pages is expected to deploy the `main` branch. Keep the site in setup mode until new content is ready.
 
 ## Local Verification
 
@@ -42,18 +42,8 @@ The build command uses the local site configuration file:
 sites/chatgpt-codex-cn.yaml
 ```
 
-The planned public URL is `https://gptaixufei.com/`. Keep `site.status: setup` and `noindex` until the domain review is complete and the domain is bound in Cloudflare Pages.
+The public URL is `https://gptaixufei.com/`. Keep `site.status: setup` and `noindex` until new content is ready.
 
 ## Content Scope
 
-The site is positioned as a practical Chinese guide for ChatGPT, ChatGPT Plus, ChatGPT Pro, Codex, OpenAI, and AI tools. The initial topic clusters cover:
-
-- ChatGPT Plus
-- Codex
-- Plus vs Pro
-- ChatGPT Plus 国内订阅
-- Codex 是什么
-- Codex 额度不足
-- ChatGPT Plus 使用指南
-
-Conversion links should stay soft: ordinary pages should use zero or one natural conversion link only when the reader has a clear subscription or upgrade intent.
+The previous public content has been removed. New topics, categories, articles, and conversion rules should be defined before publishing fresh content.

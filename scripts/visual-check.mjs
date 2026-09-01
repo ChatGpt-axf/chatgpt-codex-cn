@@ -25,8 +25,8 @@ const failures = [];
 const cases = [
   { name: 'home-desktop', path: withSiteBase('/', config), viewport: { width: 1440, height: 1000 } },
   { name: 'home-mobile', path: withSiteBase('/', config), viewport: { width: 390, height: 844 } },
-  { name: 'article-desktop', path: withSiteBase('/guides/chatgpt/', config), viewport: { width: 1440, height: 1000 } },
-  { name: 'article-mobile', path: withSiteBase('/guides/chatgpt/', config), viewport: { width: 390, height: 844 } },
+  { name: 'article-desktop', path: withSiteBase('/guides/chatgpt-plus-guide/', config), viewport: { width: 1440, height: 1000 } },
+  { name: 'article-mobile', path: withSiteBase('/guides/chatgpt-plus-guide/', config), viewport: { width: 390, height: 844 } },
 ];
 
 try {

@@ -54,7 +54,15 @@ export async function runSearchAudit({ write = true } = {}) {
   const robots = fs.existsSync(robotsPath) ? fs.readFileSync(robotsPath, 'utf8') : '';
   const submissionLog = readSubmissionLog();
   const { incoming } = inspectLinks(pages, buildMap);
-  const indexablePages = pages.filter((page) => !page.$('meta[name="robots"]').attr('content')?.toLowerCase().includes('noindex'));
+  const verificationRoutes = new Set(
+    Object.values(config.searchEngines || {})
+      .filter((engine) => engine.enabled && engine.verification?.method === 'html' && engine.verification.fileName)
+      .map((engine) => withSiteBase(`/${engine.verification.fileName}`, config)),
+  );
+  const indexablePages = pages.filter((page) =>
+    !verificationRoutes.has(page.route)
+    && !page.$('meta[name="robots"]').attr('content')?.toLowerCase().includes('noindex'),
+  );
   const reports = [];
 
   for (const id of ENGINE_IDS) {

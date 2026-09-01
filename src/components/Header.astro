@@ -11,15 +11,11 @@ import { withBasePath } from '../utils/url';
     </a>
     <nav class="desktop-nav" aria-label="主导航">
       {siteConfig.navigation.header.map((item) => <a href={withBasePath(item.url)}>{item.label}</a>)}
-      {siteConfig.features.search && <a class="search-link" href={withBasePath('/search/')}>搜索</a>}
-      <a class="nav-cta" href={siteConfig.site.conversionUrl} target="_blank" rel="noopener noreferrer">订阅 / 升级</a>
     </nav>
     <details class="mobile-nav">
       <summary aria-label="打开导航"><span aria-hidden="true">☰</span><span class="sr-only">菜单</span></summary>
       <nav aria-label="移动端主导航">
         {siteConfig.navigation.header.map((item) => <a href={withBasePath(item.url)}>{item.label}</a>)}
-        {siteConfig.features.search && <a href={withBasePath('/search/')}>搜索</a>}
-        <a class="nav-cta" href={siteConfig.site.conversionUrl} target="_blank" rel="noopener noreferrer">订阅 / 升级</a>
       </nav>
     </details>
   </div>

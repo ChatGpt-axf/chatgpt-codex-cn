@@ -11,15 +11,14 @@ import { withBasePath } from '../utils/url';
         <span>{siteConfig.site.name}</span>
       </a>
       <p>{siteConfig.site.description}</p>
+      <p class="footer-note">当前站点内容正在重新整理。</p>
     </div>
     <nav aria-label="页脚导航">
       {siteConfig.navigation.footer.map((item) => <a href={withBasePath(item.url)}>{item.label}</a>)}
-      {siteConfig.features.rss && <a href={withBasePath('/rss.xml')}>RSS</a>}
-      <a href={withBasePath('/llms.txt')}>llms.txt</a>
     </nav>
   </div>
   <div class="container footer-bottom">
     <span>© {new Date().getFullYear()} {siteConfig.organization.name}</span>
-    <span>内容以来源与更新时间为准</span>
+    <span>内容重新整理中</span>
   </div>
 </footer>

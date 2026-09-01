@@ -25,6 +25,11 @@ const standard = getUrlset('sitemap.xml');
 const indexed = getSitemapUrls();
 const errors = [];
 const warnings = [];
+const verificationRoutes = new Set(
+  Object.values(config.searchEngines || {})
+    .filter((engine) => engine.enabled && engine.verification?.method === 'html' && engine.verification.fileName)
+    .map((engine) => withSiteBase(`/${engine.verification.fileName}`, config)),
+);
 
 function error(code, message, file = '') { errors.push({ code, message, file }); }
 function warn(code, message, file = '') { warnings.push({ code, message, file }); }
@@ -55,6 +60,7 @@ if (baseDir && fs.existsSync(path.resolve('dist', baseDir, 'index.html'))) {
 }
 
 for (const page of pages) {
+  if (verificationRoutes.has(page.route)) continue;
   const canonical = page.$('link[rel="canonical"]').attr('href') || '';
   if (!canonical || !isProjectUrl(canonical, config)) error('canonical-base', `Canonical is outside ${projectUrl}: ${canonical || 'missing'}`, page.route);
   else if (page.route !== withSiteBase('/404.html', config) && decodeURI(new URL(canonical).pathname) !== page.route) {

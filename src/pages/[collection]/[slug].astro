@@ -18,6 +18,9 @@ const { entry } = Astro.props as { entry: AnyContentEntry };
 const { Content, headings } = await render(entry);
 const allEntries = await getPublishedContent();
 const related = getRelatedContent(entry, allEntries, siteConfig.content.relatedArticleCount);
+const currentIndex = allEntries.findIndex((item) => item.collection === entry.collection && item.data.slug === entry.data.slug);
+const previous = currentIndex > 0 ? allEntries[currentIndex - 1] : undefined;
+const next = currentIndex >= 0 && currentIndex < allEntries.length - 1 ? allEntries[currentIndex + 1] : undefined;
 const path = contentPath(entry);
 const breadcrumbs = [
   { name: '首页', path: '/' },
@@ -43,7 +46,7 @@ if (entry.data.faq.length > 0) schemas.push(faqSchema(entry.data.faq));
   author={entry.data.author}
   schema={schemas}
 >
-  <ContentLayout entry={entry} headings={headings} related={related}>
+  <ContentLayout entry={entry} headings={headings} related={related} previous={previous} next={next}>
     <Content />
   </ContentLayout>
 </BaseLayout>

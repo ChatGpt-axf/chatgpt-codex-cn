@@ -1,9 +1,0 @@
-id: openai
-name: OpenAI
-aliases: []
-description: 提供 ChatGPT、Codex 与 API 产品的 AI 研究和产品机构；产品信息应优先从其官方文档与公告核验。
-officialUrl: https://openai.com/
-type: Organization
-relatedEntities:
-  - chatgpt
-  - codex

@@ -31,7 +31,7 @@ export async function getCanonicalSitemapEntries(): Promise<SitemapEntry[]> {
     if (!current || new Date(lastmod) > new Date(current)) entries.set(loc, lastmod);
   };
 
-  for (const path of ['/', '/chatgpt/', '/chatgpt-plus/', '/chatgpt-pro/', '/codex/', '/ai-tools/', '/about/', '/contact/', '/editorial-policy/', '/privacy/', '/terms/']) add(path);
+  for (const path of ['/']) add(path);
   for (const collection of CONTENT_COLLECTIONS) {
     const collectionEntries = content.filter((entry) => entry.collection === collection);
     if (collectionEntries.length > 0) add(`/${collection}/`, latest(collectionEntries));

@@ -12,6 +12,11 @@ const titleOwners = new Map();
 const descriptionOwners = new Map();
 const canonicalOwners = new Map();
 const indexableRoutes = new Set();
+const verificationRoutes = new Set(
+  Object.values(site.searchEngines || {})
+    .filter((engine) => engine.enabled && engine.verification?.method === 'html' && engine.verification.fileName)
+    .map((engine) => withSiteBase(`/${engine.verification.fileName}`, site)),
+);
 
 function addOwner(map, value, route) {
   if (!value) return;
@@ -22,6 +27,10 @@ function addOwner(map, value, route) {
 
 for (const page of pages) {
   const { $, route } = page;
+  if (verificationRoutes.has(route)) {
+    report.pass();
+    continue;
+  }
   const title = $('title').first().text().trim();
   const description = $('meta[name="description"]').attr('content')?.trim() || '';
   const robots = $('meta[name="robots"]').attr('content')?.toLowerCase() || '';

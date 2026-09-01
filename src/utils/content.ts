@@ -16,7 +16,7 @@ export type AnyContentEntry = CollectionEntry<ContentCollection>;
 export const COLLECTION_LABELS: Record<ContentCollection, string> = {
   guides: '实用指南',
   comparisons: '产品对比',
-  problems: '问题解决',
+  problems: '常见问题',
   faq: '常见问题',
   concepts: '核心概念',
   news: '更新动态',

@@ -183,7 +183,7 @@ export function getVerificationPaths(): Set<string> {
 
 export function getNoindexPaths(): Set<string> {
   const root = `src/content/sites/${activeSiteId}`;
-  const paths = new Set<string>();
+  const paths = new Set<string>(['/contact/', '/editorial-policy/', '/terms/']);
   const publishedCollections = new Set<string>();
   for (const file of fg.sync(`${root}/**/*.{md,mdx}`)) {
     const data = matter.read(file).data;

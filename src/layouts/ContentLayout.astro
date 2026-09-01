@@ -4,7 +4,6 @@ import { COLLECTION_LABELS, contentPath, formatDate, toUrlSegment } from '../uti
 import { siteConfig } from '../config/site';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import ContentCard from '../components/ContentCard.astro';
-import ConversionLink from '../components/ConversionLink.astro';
 import { withBasePath } from '../utils/url';
 
 interface Heading { depth: number; slug: string; text: string }
@@ -12,9 +11,11 @@ interface Props {
   entry: AnyContentEntry;
   headings: Heading[];
   related: AnyContentEntry[];
+  previous?: AnyContentEntry;
+  next?: AnyContentEntry;
 }
 
-const { entry, headings, related } = Astro.props;
+const { entry, headings, related, previous, next } = Astro.props;
 const { data } = entry;
 const toc = headings.filter((heading) => heading.depth === 2 || heading.depth === 3);
 ---
@@ -88,7 +89,22 @@ const toc = headings.filter((heading) => heading.depth === 2 || heading.depth ==
         </section>
       )}
 
-      <ConversionLink level={data.conversionLevel} />
+      {(previous || next) && (
+        <nav class="article-pager" aria-label="上一篇和下一篇">
+          {previous ? (
+            <a href={contentPath(previous)}>
+              <span>上一篇</span>
+              <strong>{previous.data.title}</strong>
+            </a>
+          ) : <span></span>}
+          {next ? (
+            <a href={contentPath(next)} class="next-link">
+              <span>下一篇</span>
+              <strong>{next.data.title}</strong>
+            </a>
+          ) : <span></span>}
+        </nav>
+      )}
     </article>
 
     {siteConfig.features.tableOfContents && toc.length > 0 && (
