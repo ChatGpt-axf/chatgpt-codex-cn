@@ -1,12 +1,12 @@
 site:
   id: chatgpt-codex-cn
-  name: 爱续费AI
-  shortName: 爱续费AI
+  name: gptaixufei.com
+  shortName: gptaixufei.com
   domain: gptaixufei.com
   baseUrl: https://gptaixufei.com
   basePath: /
   publicUrl: https://gptaixufei.com/
-  brand: 爱续费AI
+  brand: gptaixufei.com
   conversionUrl: https://gptaixufei.com/
   status: setup
   publishMethod: git_cloudflare_pages
@@ -28,15 +28,15 @@ brand:
   borderColor: '#d7e2dc'
 
 organization:
-  name: 爱续费AI编辑部
-  legalName: 爱续费AI编辑部
-  description: 爱续费AI独立站内容正在重新整理。
+  name: gptaixufei.com
+  legalName: gptaixufei.com
+  description: 站点内容正在重新整理。
   logo: /images/site-logo.svg
   email: editor@gptaixufei.com
 
 seo:
-  defaultTitle: 爱续费AI - 内容整理中
-  titleTemplate: '%s | 爱续费AI'
+  defaultTitle: gptaixufei.com - 内容整理中
+  titleTemplate: '%s | gptaixufei.com'
   defaultDescription: 本站原有内容已清空，后续将根据新的主题定位、栏目结构和文章计划重新上线。
   defaultOgImage: /images/knowledge-network.webp
   twitterCard: summary_large_image
@@ -54,8 +54,8 @@ navigation:
       url: /
 
 content:
-  author: 爱续费AI编辑部
-  publisher: 爱续费AI
+  author: gptaixufei.com
+  publisher: gptaixufei.com
   defaultConversionLevel: none
   showLastUpdated: true
   showSources: true

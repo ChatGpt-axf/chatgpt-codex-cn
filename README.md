@@ -1,4 +1,4 @@
-# 爱续费AI
+# gptaixufei.com
 
 Astro static site shell for `gptaixufei.com`.
 
