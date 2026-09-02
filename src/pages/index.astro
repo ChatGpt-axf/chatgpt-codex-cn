@@ -1,59 +1,287 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { organizationSchema, webPageSchema, websiteSchema } from '../seo/schema';
-
-const title = 'gptaixufei.com - 内容整理中';
-const description = '本站原有内容已清空，后续将根据新的主题定位、栏目结构和文章计划重新上线。';
-const schemas: Array<Record<string, unknown>> = [
-  websiteSchema(),
-  organizationSchema(),
-  webPageSchema({ title, description, path: '/' }),
-];
+const title = 'ChatGPT Plus、Pro 和 Codex 有什么区别？应该怎么选择？';
+const description = '从日常使用、高频任务和编程开发三个角度，说明 ChatGPT Plus、Pro 和 Codex 的区别，并给出选择建议。';
 ---
 
-<BaseLayout title={title} description={description} canonicalPath="/" noindex={true} schema={schemas}>
-  <section class="empty-home">
-    <div class="empty-panel">
-      <span class="eyebrow">gptaixufei.com</span>
-      <h1>内容整理中</h1>
-      <p>当前独立站内容已清空，后续会根据新的主题定位、栏目结构和文章计划重新上线。</p>
-    </div>
-  </section>
-</BaseLayout>
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+  </head>
+  <body>
+    <main class="page">
+      <article class="article">
+        <h1>{title}</h1>
+
+        <p>随着 AI 工具使用场景越来越多，不同用户对功能和使用频率的需求也不一样。</p>
+
+        <p>不少人在使用 ChatGPT 时，会看到 Plus、Pro、Codex 等不同名称，但第一次接触时往往不太清楚它们之间有什么区别。</p>
+
+        <p>实际上，它们所解决的问题并不完全相同。</p>
+
+        <h2>一、ChatGPT Plus 适合哪些人？</h2>
+
+        <p>Plus 更适合大多数日常使用 ChatGPT 的用户。</p>
+
+        <p>例如：</p>
+
+        <ul>
+          <li>日常聊天与问答</li>
+          <li>文案撰写</li>
+          <li>内容总结</li>
+          <li>翻译</li>
+          <li>文件分析</li>
+          <li>图片理解</li>
+          <li>学习辅助</li>
+          <li>轻度代码编写</li>
+          <li>日常办公</li>
+        </ul>
+
+        <p>对于使用频率不是特别高，同时又希望获得比基础版本更完整使用体验的用户来说，Plus 通常已经能够覆盖很多常见需求。</p>
+
+        <p>如果平时主要是写文章、整理资料、处理办公内容或者偶尔写一些代码，一般可以先从 Plus 开始。</p>
+
+        <h2>二、ChatGPT Pro 适合哪些人？</h2>
+
+        <p>Pro 更偏向高频和高强度使用场景。</p>
+
+        <p>例如：</p>
+
+        <ul>
+          <li>每天长时间使用 AI</li>
+          <li>复杂资料分析</li>
+          <li>高频代码开发</li>
+          <li>大量文件处理</li>
+          <li>多步骤复杂任务</li>
+          <li>高频使用高级模型</li>
+          <li>AI 辅助开发</li>
+          <li>对使用额度要求较高</li>
+        </ul>
+
+        <p>对于普通用户来说，并不是等级越高就一定越适合。</p>
+
+        <p>如果每天只是偶尔使用 ChatGPT，其实没有必要单纯为了更高的版本而选择 Pro。</p>
+
+        <p>但如果已经明显感觉日常使用频率比较高，或者经常处理复杂任务，那么更高等级的方案会更加适合。</p>
+
+        <h2>三、Codex 是什么？</h2>
+
+        <p>Codex 主要面向编程和软件开发场景。</p>
+
+        <p>它和普通的聊天问答有所不同。</p>
+
+        <p>普通 AI 对话更适合：</p>
+
+        <ul>
+          <li>问代码问题</li>
+          <li>生成一段代码</li>
+          <li>解释代码</li>
+          <li>查找 Bug 原因</li>
+        </ul>
+
+        <p>而 Codex 更偏向：</p>
+
+        <ul>
+          <li>阅读项目代码</li>
+          <li>修改多个文件</li>
+          <li>理解项目结构</li>
+          <li>修复 Bug</li>
+          <li>编写新功能</li>
+          <li>重构代码</li>
+          <li>辅助命令行操作</li>
+          <li>配合 IDE 进行开发</li>
+        </ul>
+
+        <p>如果只是偶尔问一些编程问题，普通 ChatGPT 对话通常就已经够用了。</p>
+
+        <p>如果经常需要直接处理完整项目，那么 Codex 这类开发工具会更加方便。</p>
+
+        <h2>四、Plus 和 Pro 应该怎么选择？</h2>
+
+        <p>可以根据自己的实际使用情况判断。</p>
+
+        <h3>轻度使用</h3>
+
+        <p>如果主要用于：</p>
+
+        <p>写作、翻译、总结、学习、办公、偶尔编程。</p>
+
+        <p>可以优先考虑 Plus。</p>
+
+        <h3>高频使用</h3>
+
+        <p>如果每天都会长时间使用，并且经常进行复杂分析、代码开发或者大量文件处理，可以进一步了解 Pro。</p>
+
+        <h3>主要用于编程</h3>
+
+        <p>如果主要需求是软件开发、项目代码修改和程序调试，那么除了关注 Plus 或 Pro，还可以重点了解 Codex。</p>
+
+        <h2>五、不要只看版本名称</h2>
+
+        <p>选择 AI 工具时，更重要的是看自己的实际需求。</p>
+
+        <p>很多功能并不是每个人都会使用。</p>
+
+        <p>例如，一个主要用于写作的用户，和一个每天需要处理大型代码项目的开发者，对 AI 工具的需求会完全不同。</p>
+
+        <p>因此选择之前可以先考虑三个问题：</p>
+
+        <p>第一，我每天大概使用多长时间？</p>
+
+        <p>第二，我主要用 AI 做什么？</p>
+
+        <p>第三，我是否经常遇到额度或功能限制？</p>
+
+        <p>根据这三个问题，通常就能比较容易判断自己更适合哪一种方案。</p>
+
+        <h2>六、常见问题</h2>
+
+        <h3>Plus 可以用来写代码吗？</h3>
+
+        <p>可以。</p>
+
+        <p>对于代码解释、生成代码、修改小段代码以及日常开发问题，Plus 通常可以满足不少使用需求。</p>
+
+        <h3>Codex 只有程序员才能使用吗？</h3>
+
+        <p>并不是。</p>
+
+        <p>但 Codex 主要围绕软件开发和项目代码，因此程序员、开发者以及需要修改网站或程序项目的用户会更容易发挥它的作用。</p>
+
+        <h3>Pro 一定比 Plus 更好吗？</h3>
+
+        <p>从功能和使用上限来看，更高等级方案通常会提供不同的能力或额度，但并不意味着所有用户都需要。</p>
+
+        <p>最终还是应该根据使用频率和实际需求选择。</p>
+
+        <h3>为什么不同账号看到的功能不一样？</h3>
+
+        <p>AI 产品经常更新，不同账号可能因为版本、地区、功能测试以及发布时间等原因看到不同功能。</p>
+
+        <p>因此具体功能应以当前账号实际显示为准。</p>
+
+        <h2>总结</h2>
+
+        <p>如果只是日常使用 ChatGPT，Plus 通常已经能够满足很多需求。</p>
+
+        <p>如果属于高频用户，经常处理复杂任务，可以再考虑 Pro。</p>
+
+        <p>如果主要需求集中在代码开发、项目修改和程序调试，则可以进一步了解 Codex。</p>
+
+        <p>选择时没有必要单纯追求更高版本，适合自己的使用方式才是最重要的。</p>
+      </article>
+    </main>
+  </body>
+</html>
 
 <style>
-  .empty-home {
-    display: grid;
-    min-height: 62vh;
-    place-items: center;
-    padding: 64px 20px;
-    background: linear-gradient(180deg, #f7faf8 0%, #ffffff 100%);
+  :global(*) {
+    box-sizing: border-box;
   }
 
-  .empty-panel {
-    width: min(100%, 720px);
-    padding: 42px;
-    border: 1px solid var(--color-border);
-    border-radius: 8px;
-    background: white;
-    text-align: center;
+  :global(html) {
+    color: #18201c;
+    background: #f6f8f7;
+    font-family:
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      "PingFang SC",
+      "Hiragino Sans GB",
+      "Microsoft YaHei",
+      sans-serif;
+    text-rendering: optimizeLegibility;
   }
 
-  .empty-panel h1 {
-    margin: 10px 0 14px;
-    font-size: clamp(2rem, 6vw, 3.6rem);
-    line-height: 1.12;
-  }
-
-  .empty-panel p {
+  :global(body) {
     margin: 0;
-    color: var(--color-muted);
-    font-size: 1.05rem;
+    background: #f6f8f7;
   }
 
-  @media (max-width: 640px) {
-    .empty-panel {
-      padding: 30px 22px;
+  .page {
+    width: 100%;
+    padding: 52px 20px 72px;
+  }
+
+  .article {
+    width: min(100%, 860px);
+    margin: 0 auto;
+    padding: 48px 52px 56px;
+    border: 1px solid #dde5e0;
+    border-radius: 8px;
+    background: #ffffff;
+    box-shadow: 0 16px 42px rgba(20, 39, 30, 0.06);
+  }
+
+  h1,
+  h2,
+  h3,
+  p,
+  ul {
+    overflow-wrap: anywhere;
+  }
+
+  h1 {
+    margin: 0 0 28px;
+    color: #111a16;
+    font-size: clamp(2rem, 4.8vw, 3.1rem);
+    line-height: 1.2;
+    letter-spacing: 0;
+  }
+
+  h2 {
+    margin: 44px 0 16px;
+    padding-top: 4px;
+    color: #14251d;
+    font-size: clamp(1.35rem, 3vw, 1.75rem);
+    line-height: 1.35;
+    letter-spacing: 0;
+  }
+
+  h3 {
+    margin: 28px 0 12px;
+    color: #193329;
+    font-size: 1.15rem;
+    line-height: 1.45;
+    letter-spacing: 0;
+  }
+
+  p,
+  li {
+    color: #2d3a33;
+    font-size: 17px;
+    line-height: 1.85;
+  }
+
+  p {
+    margin: 0 0 16px;
+  }
+
+  ul {
+    margin: 12px 0 24px;
+    padding-left: 1.35em;
+  }
+
+  li + li {
+    margin-top: 6px;
+  }
+
+  @media (max-width: 720px) {
+    .page {
+      padding: 28px 14px 48px;
+    }
+
+    .article {
+      padding: 30px 22px 38px;
+    }
+
+    p,
+    li {
+      font-size: 16px;
+      line-height: 1.8;
     }
   }
 </style>
